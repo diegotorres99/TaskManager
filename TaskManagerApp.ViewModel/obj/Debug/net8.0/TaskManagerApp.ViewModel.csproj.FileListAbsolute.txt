@@ -1,0 +1,11 @@
+C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\bin\Debug\net8.0\TaskManagerApp.ViewModel.deps.json
+C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\bin\Debug\net8.0\TaskManagerApp.ViewModel.dll
+C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\bin\Debug\net8.0\TaskManagerApp.ViewModel.pdb
+C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\obj\Debug\net8.0\TaskManagerApp.ViewModel.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\obj\Debug\net8.0\TaskManagerApp.ViewModel.AssemblyInfoInputs.cache
+C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\obj\Debug\net8.0\TaskManagerApp.ViewModel.AssemblyInfo.cs
+C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\obj\Debug\net8.0\TaskManagerApp.ViewModel.csproj.CoreCompileInputs.cache
+C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\obj\Debug\net8.0\TaskManagerApp.ViewModel.dll
+C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\obj\Debug\net8.0\refint\TaskManagerApp.ViewModel.dll
+C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\obj\Debug\net8.0\TaskManagerApp.ViewModel.pdb
+C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\obj\Debug\net8.0\ref\TaskManagerApp.ViewModel.dll
