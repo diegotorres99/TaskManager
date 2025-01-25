@@ -1,0 +1,62 @@
+{
+  "Estados": [
+    {
+      "idEstado": 1,
+      "Nombre": "PENDIENTE"
+    },
+    {
+      "idEstado": 2,
+      "Nombre": "EN PROCESO"
+    },
+    {
+      "idEstado": 3,
+      "Nombre": "COMPLETADA"
+    }
+  ],
+  "Usuarios": [
+    {
+      "idUsuario": 1,
+      "Nombre": "Diego"
+    },
+    {
+      "idUsuario": 2,
+      "Nombre": "Maria"
+    },
+    {
+      "idUsuario": 3,
+      "Nombre": "Carlos"
+    }
+  ],
+  "Tareas": [
+    {
+      "idTarea": 1,
+      "Descripcion": "Terminar reporte semanal",
+      "idUsuario": 1,
+      "idEstado": 1,
+      "Prioridad": "ALTA",
+      "FechaCompromiso": "2025-01-31",
+      "Notas": "Revisar secciones pendientes antes del viernes",
+      "FechaCreacion": "2025-01-24 08:30:00"
+    },
+    {
+      "idTarea": 2,
+      "Descripcion": "Preparar presentación de proyecto",
+      "idUsuario": 2,
+      "idEstado": 2,
+      "Prioridad": "MEDIA",
+      "FechaCompromiso": "2025-02-05",
+      "Notas": "Incluir las métricas de enero",
+      "FechaCreacion": "2025-01-22 10:00:00"
+    },
+    {
+      "idTarea": 3,
+      "Descripcion": "Actualizar base de datos",
+      "idUsuario": 3,
+      "idEstado": 1,
+      "Prioridad": "BAJA",
+      "FechaCompromiso": "2025-02-10",
+      "Notas": "Solicitar respaldo antes de realizar cambios",
+      "FechaCreacion": "2025-01-20 14:45:00"
+    }
+  ]
+}

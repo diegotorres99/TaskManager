@@ -19,8 +19,8 @@
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgMicrosoft_Web_WebView2 Condition=" '$(PkgMicrosoft_Web_WebView2)' == '' ">C:\Users\luis_\.nuget\packages\microsoft.web.webview2\1.0.1245.22</PkgMicrosoft_Web_WebView2>
-    <PkgDevExpress_Data Condition=" '$(PkgDevExpress_Data)' == '' ">C:\Program Files\DevExpress 24.2\Components\Offline Packages\devexpress.data\24.2.3</PkgDevExpress_Data>
-    <PkgDevExpress_Xpo Condition=" '$(PkgDevExpress_Xpo)' == '' ">C:\Program Files\DevExpress 24.2\Components\Offline Packages\devexpress.xpo\24.2.3</PkgDevExpress_Xpo>
+    <PkgDevExpress_Data Condition=" '$(PkgDevExpress_Data)' == '' ">C:\Users\luis_\.nuget\packages\devexpress.data\24.2.3</PkgDevExpress_Data>
+    <PkgDevExpress_Xpo Condition=" '$(PkgDevExpress_Xpo)' == '' ">C:\Users\luis_\.nuget\packages\devexpress.xpo\24.2.3</PkgDevExpress_Xpo>
     <PkgDevExpress_Utils Condition=" '$(PkgDevExpress_Utils)' == '' ">C:\Program Files\DevExpress 24.2\Components\Offline Packages\devexpress.utils\24.2.3</PkgDevExpress_Utils>
     <PkgDevExpress_Win_Navigation Condition=" '$(PkgDevExpress_Win_Navigation)' == '' ">C:\Program Files\DevExpress 24.2\Components\Offline Packages\devexpress.win.navigation\24.2.3</PkgDevExpress_Win_Navigation>
     <PkgDevExpress_Win_TreeList Condition=" '$(PkgDevExpress_Win_TreeList)' == '' ">C:\Program Files\DevExpress 24.2\Components\Offline Packages\devexpress.win.treelist\24.2.3</PkgDevExpress_Win_TreeList>

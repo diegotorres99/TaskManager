@@ -147,3 +147,4 @@ C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp\bin\Debug\net8.0-windo
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp\obj\Debug\net8.0-windows\TaskManagerApp.View.csproj.AssemblyReference.cache
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp\obj\Debug\net8.0-windows\TaskMana.DC97EABE.Up2Date
+C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp\obj\Debug\net8.0-windows\TaskManagerApp.View.sourcelink.json

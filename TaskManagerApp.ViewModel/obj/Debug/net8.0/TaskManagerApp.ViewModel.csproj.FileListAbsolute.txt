@@ -9,3 +9,4 @@ C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\obj\Debug\ne
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\obj\Debug\net8.0\refint\TaskManagerApp.ViewModel.dll
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\obj\Debug\net8.0\TaskManagerApp.ViewModel.pdb
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\obj\Debug\net8.0\ref\TaskManagerApp.ViewModel.dll
+C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\obj\Debug\net8.0\TaskManagerApp.ViewModel.sourcelink.json

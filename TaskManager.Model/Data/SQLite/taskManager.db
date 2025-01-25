@@ -1,0 +1,33 @@
+CREATE TABLE States (
+    StateId INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name TEXT NOT NULL UNIQUE
+);
+
+CREATE TABLE Users (
+    UserId INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name TEXT NOT NULL UNIQUE
+);
+
+CREATE TABLE Tasks (
+    TaskId INTEGER PRIMARY KEY AUTOINCREMENT,
+    Description TEXT NOT NULL,
+    UserId INTEGER NOT NULL,
+    StateId INTEGER NOT NULL,
+    Priority TEXT CHECK(Priority IN ('ALTA', 'MEDIA', 'BAJA')) NOT NULL,
+    DueDate DATE NOT NULL,
+    Notes TEXT,
+    CreationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_User FOREIGN KEY (UserId)
+        REFERENCES Users (UserId)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    CONSTRAINT fk_State FOREIGN KEY (StateId)
+        REFERENCES States (StateId)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
+);
+
+CREATE INDEX idx_DueDate ON Tasks (DueDate);
+CREATE INDEX idx_UserId ON Tasks (UserId);
+CREATE INDEX idx_StateId ON Tasks (StateId);
+CREATE INDEX idx_Priority ON Tasks (Priority);
