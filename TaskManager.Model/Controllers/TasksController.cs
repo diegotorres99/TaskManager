@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TaskManager.Model.Interfaces;
 using TaskManager.Model.Entities;
 using TaskManager.Model.Repository;
 
