@@ -1,5 +1,5 @@
-﻿using TaskManager.Model.Data.Migrations;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using TaskManager.Model.Helpers;
 
 namespace TaskManager.Model.Extensions
 {
@@ -9,19 +9,13 @@ namespace TaskManager.Model.Extensions
             IConfiguration config)
         {
             services.AddControllers();
-            services.AddDbContext<DataContext>(opt =>
+            services.AddSingleton<IDatabaseHelper>(provider =>
             {
-                opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
+                var connectionString = config.GetConnectionString("DefaultConnection");
+                return new DatabaseHelper(connectionString);
             });
+
             services.AddCors();
-            //services.AddScoped<ITokenService, TokenService>();
-            //services.AddScoped<IUserRepository, UserRepository>();
-            //services.AddScoped<ILikesRepository, LikesRepository>();
-            //services.AddScoped<IPhotoService, PhotoService>();
-            //services.AddScoped<IMessageRepository, MessageRepository>();
-            //services.AddScoped<LogUserActivity>();
-            //services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            //services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             return services;
         }
     }

@@ -12,4 +12,8 @@
     <PackageReference Include="DevExpress.Win.Dashboard.CustomItemExtension" Version="24.2.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TaskManagerApp.ViewModel\TaskManagerApp.ViewModel.csproj" />
+  </ItemGroup>
+
 </Project>

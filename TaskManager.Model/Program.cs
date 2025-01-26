@@ -1,5 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using TaskManager.Model.Data.Migrations;
 using TaskManager.Model.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,18 +15,18 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-using var scope = app.Services.CreateScope();
-var services = scope.ServiceProvider;
-try
-{
-    var context = services.GetRequiredService<DataContext>();
-    await context.Database.MigrateAsync();
-    await Seed.seedTasks(context);
-}
-catch (Exception ex)
-{
-    var logger = services.GetRequiredService<ILogger<Program>>();
-    logger.LogError(ex, "An error occurred during migration");
-}
+//using var scope = app.Services.CreateScope();
+//var services = scope.ServiceProvider;
+//try
+//{
+//    var context = services.GetRequiredService<DataContext>();
+//    await context.Database.MigrateAsync();
+//    await Seed.SeedData(context);
+//}
+//catch (Exception ex)
+//{
+//    var logger = services.GetRequiredService<ILogger<Program>>();
+//    logger.LogError(ex, "An error occurred during data base creation");
+//}
 
 app.Run();

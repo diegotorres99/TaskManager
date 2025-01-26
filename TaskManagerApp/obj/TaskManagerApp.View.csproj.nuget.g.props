@@ -14,6 +14,7 @@
     <SourceRoot Include="C:\Program Files\DevExpress 24.2\Components\Offline Packages\" />
   </ItemGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)microsoft.entityframeworkcore\8.0.10\buildTransitive\net8.0\Microsoft.EntityFrameworkCore.props" Condition="Exists('$(NuGetPackageRoot)microsoft.entityframeworkcore\8.0.10\buildTransitive\net8.0\Microsoft.EntityFrameworkCore.props')" />
     <Import Project="C:\Program Files\DevExpress 24.2\Components\Offline Packages\devexpress.data.desktop\24.2.3\build\net8.0-windows\DevExpress.Data.Desktop.props" Condition="Exists('C:\Program Files\DevExpress 24.2\Components\Offline Packages\devexpress.data.desktop\24.2.3\build\net8.0-windows\DevExpress.Data.Desktop.props')" />
     <Import Project="C:\Program Files\DevExpress 24.2\Components\Offline Packages\devexpress.diagram.core\24.2.3\build\net8.0-windows\DevExpress.Diagram.Core.props" Condition="Exists('C:\Program Files\DevExpress 24.2\Components\Offline Packages\devexpress.diagram.core\24.2.3\build\net8.0-windows\DevExpress.Diagram.Core.props')" />
   </ImportGroup>
