@@ -1,7 +1,8 @@
 ﻿using System.Net.Http.Json;
-using System.Text.Json;
 using System.Text;
+using System.Text.Json;
 using TaskManager.Model.DTOs;
+using TaskManager.ViewModels.Models;
 
 
 namespace TaskManagerApp.ViewModel.Services
@@ -15,31 +16,53 @@ namespace TaskManagerApp.ViewModel.Services
             // Assuming the base address of your API is already set
             _httpClient = new HttpClient
             {
-                BaseAddress = new Uri("https://your-api-endpoint.com/")
+                BaseAddress = new Uri("https://localhost:7177/")
             };
         }
 
-        public async Task<List<TaskDto>> GetOrderItemsAsync(int skip, int take, string sortField, bool sortAscending)
+        public async Task<List<TaskDto>> GetFilteredTasksAsync(TaskFilterDto filters)
         {
-            var requestUri = $"api/orderitems?skip={skip}&take={take}&sortField={sortField}&sortAscending={sortAscending}";
+            // Construct query parameters dynamically from the TaskFilterDto object
+            var queryParams = new List<string>();
+
+            if (filters.UserId.HasValue)
+                queryParams.Add($"UserId={filters.UserId}");
+            if (filters.StateId.HasValue)
+                queryParams.Add($"StateId={filters.StateId}");
+            if (!string.IsNullOrEmpty(filters.PriorityId.ToString()))
+                queryParams.Add($"Priority={filters.PriorityId}");
+            if (filters.DueDateStart.HasValue)
+                queryParams.Add($"DueDateStart={filters.DueDateStart.Value:yyyy-MM-dd}");
+            if (filters.DueDateEnd.HasValue)
+                queryParams.Add($"DueDateEnd={filters.DueDateEnd.Value:yyyy-MM-dd}");
+
+            queryParams.Add($"Skip={filters.Skip}");
+            queryParams.Add($"Take={filters.Take}");
+            queryParams.Add($"SortField={filters.SortField}");
+            queryParams.Add($"SortAscending={filters.SortAscending.ToString().ToLower()}");
+
+            // Combine the base URI with query parameters
+            var requestUri = $"api/tasks?{string.Join("&", queryParams)}";
 
             try
             {
-                var response = await _httpClient.GetAsync(requestUri);
+                // Send the POST request to the endpoint with filters in the body
+                var response = await _httpClient.PostAsJsonAsync("api/tasks", filters);
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    // Log the error or handle it as per your application's requirements
-                    throw new HttpRequestException($"Error fetching order items: {response.ReasonPhrase}");
+                    // Handle the error if the response is not successful
+                    throw new HttpRequestException($"Error fetching tasks: {response.ReasonPhrase}");
                 }
 
-                var orderItems = await response.Content.ReadFromJsonAsync<List<TaskDto>>();
-                return orderItems ?? new List<TaskDto>();
+                // Deserialize the response into a list of TaskDto
+                var taskResponse = await response.Content.ReadFromJsonAsync<TaskResponseDto>();
+                return taskResponse?.Items ?? new List<TaskDto>();
             }
             catch (Exception ex)
             {
                 // Log or handle the exception
-                Console.WriteLine($"Exception in GetOrderItemsAsync: {ex.Message}");
+                Console.WriteLine($"Exception in GetFilteredTasksAsync: {ex.Message}");
                 return new List<TaskDto>();
             }
         }

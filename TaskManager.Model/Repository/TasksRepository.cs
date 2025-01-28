@@ -1,13 +1,11 @@
 ﻿using Microsoft.Data.Sqlite;
-using System.Data;
 using TaskManager.Model.DTOs;
+using TaskManager.Model.Entities;
 using TaskManager.Model.Helpers;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace TaskManager.Model.Repository
 {
-    public class TasksRepository : IGenericRepository<TaskDto>
+    public class TasksRepository : ITasksRepository
     {
         private readonly IDatabaseHelper _databaseHelper;
 
@@ -15,7 +13,7 @@ namespace TaskManager.Model.Repository
         {
             _databaseHelper = databaseHelper;
         }
-
+        
         public async Task<bool> Delete(int id)
         {
             using (var connection = _databaseHelper.GetConnection())
@@ -28,38 +26,6 @@ namespace TaskManager.Model.Repository
                     return result > 0;
                 }
             }
-        }
-
-        public async Task<IEnumerable<TaskDto>> GetAll()
-        {
-            var tasks = new List<TaskDto>();
-
-            using (var connection = _databaseHelper.GetConnection())
-            {
-                const string query = "SELECT Id, Description, UserId, StateId, Priority, DueDate, Notes, CreationDate FROM Tasks";
-                using (var command = new SqliteCommand(query, connection))
-                {
-                    using (var reader = await command.ExecuteReaderAsync())
-                    {
-                        while (await reader.ReadAsync())
-                        {
-                            tasks.Add(new TaskDto
-                            {
-                                Id = reader.GetInt32(0),
-                                Description = reader.GetString(1),
-                                UserId = reader.GetInt32(2),
-                                StateId = reader.GetInt32(3),
-                                Priority = reader.GetString(4),
-                                DueDate = reader.GetDateTime(5),
-                                Notes = reader.IsDBNull(6) ? null : reader.GetString(6),
-                                CreationDate = reader.GetDateTime(7)
-                            });
-                        }
-                    }
-                }
-            }
-
-            return tasks;
         }
 
         public async Task<TaskDto> GetById(int id)
@@ -81,7 +47,7 @@ namespace TaskManager.Model.Repository
                                 Description = reader.GetString(1),
                                 UserId = reader.GetInt32(2),
                                 StateId = reader.GetInt32(3),
-                                Priority = reader.GetString(4),
+                                PriorityId = reader.GetInt32(4),
                                 DueDate = reader.GetDateTime(5),
                                 Notes = reader.IsDBNull(6) ? null : reader.GetString(6),
                                 CreationDate = reader.GetDateTime(7)
@@ -94,62 +60,7 @@ namespace TaskManager.Model.Repository
             throw new KeyNotFoundException($"Task with ID {id} was not found.");
         }
 
-        public async Task<(IEnumerable<object> Items, int TotalCount)> GetOrderTasksAsync(int skip, int take, string sortField, bool sortAscending)
-        {
-            if (string.IsNullOrEmpty(sortField))
-            {
-                throw new ArgumentException("Sort field cannot be null or empty.");
-            }
-
-            var tasks = new List<TaskDto>();
-            string sortOrder = sortAscending ? "ASC" : "DESC";
-            string query = $@"
-                SELECT Id, Description, UserId, StateId, Priority, DueDate, Notes, CreationDate
-                FROM Tasks
-                ORDER BY {sortField} {sortOrder}
-                LIMIT @Take OFFSET @Skip;
-
-                SELECT COUNT(*) FROM Tasks;
-            ";
-
-            using (var connection = _databaseHelper.GetConnection())
-            {
-                using (var command = new SqliteCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@Take", take);
-                    command.Parameters.AddWithValue("@Skip", skip);
-
-                    using (var reader = await command.ExecuteReaderAsync())
-                    {
-                        while (await reader.ReadAsync())
-                        {
-                            tasks.Add(new TaskDto
-                            {
-                                Id = reader.GetInt32(0),
-                                Description = reader.GetString(1),
-                                UserId = reader.GetInt32(2),
-                                StateId = reader.GetInt32(3),
-                                Priority = reader.GetString(4),
-                                DueDate = reader.GetDateTime(5),
-                                Notes = reader.IsDBNull(6) ? null : reader.GetString(6),
-                                CreationDate = reader.GetDateTime(7)
-                            });
-                        }
-
-                        // Move to the second result set for the count
-                        if (await reader.NextResultAsync() && await reader.ReadAsync())
-                        {
-                            var totalCount = reader.GetInt32(0);
-                            return (tasks, totalCount);
-                        }
-                    }
-                }
-            }
-
-            return (tasks, 0);
-        }
-
-        public async Task<bool> Insert(TaskDto entity)
+        public async Task<bool> Insert(Tasks entity)
         {
             using (var connection = _databaseHelper.GetConnection())
             {
@@ -171,7 +82,7 @@ namespace TaskManager.Model.Repository
             }
         }
 
-        public async Task<bool> Update(TaskDto entity)
+        public async Task<bool> Update(Tasks entity)
         {
             using (var connection = _databaseHelper.GetConnection())
             {
@@ -193,6 +104,94 @@ namespace TaskManager.Model.Repository
                     return result > 0;
                 }
             }
+        }
+
+        public async Task <IEnumerable<TaskDto>> GetAll(TaskFilter filters)
+        {
+            try
+            {
+                var (query, countQuery, parameters) = FilterHelper.BuildTaskQuery(filters);
+
+                using (var connection = _databaseHelper.GetConnection())
+                {
+                    await connection.OpenAsync();
+
+                    var items = new List<TaskDto>();
+                    using (var command = new SqliteCommand(query, connection))
+                    {
+                        command.Parameters.AddRange(parameters.ToArray());
+
+                        using (var reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                var task = new TaskDto
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                    UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
+                                    StateId = reader.GetInt32(reader.GetOrdinal("StateId")),
+                                    PriorityId = reader.GetInt32(reader.GetOrdinal("PriorityId")),
+                                    DueDate = reader.GetDateTime(reader.GetOrdinal("DueDate")),
+                                    Description = reader.GetString(reader.GetOrdinal("Description")),
+                                    Notes = reader.IsDBNull(reader.GetOrdinal("Notes")) ? null : reader.GetString(reader.GetOrdinal("Notes"))
+                                };
+
+                                items.Add(task);
+                            }
+                        }
+                    }
+   
+                    using (var countCommand = new SqliteCommand(countQuery, connection))
+                    {
+                        foreach (var parameter in parameters)
+                        {
+                            if (parameter.ParameterName != "@Take" && parameter.ParameterName != "@Skip")
+                            {
+                                countCommand.Parameters.Add(parameter);
+                            }
+                        }
+
+                        var totalCount = Convert.ToInt32(await countCommand.ExecuteScalarAsync());
+                        return items;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error fetching filtered tasks: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<IEnumerable<TaskDto>> GetAll()
+        {
+            var tasks = new List<TaskDto>();
+
+            using (var connection = _databaseHelper.GetConnection())
+            {
+                const string query = "SELECT * FROM Tasks";
+                using (var command = new SqliteCommand(query, connection))
+                {
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            tasks.Add(new TaskDto
+                            {
+                                Id = reader.GetInt32(0),
+                                Description = reader.GetString(1),
+                                UserId = reader.GetInt32(2),
+                                StateId = reader.GetInt32(3),
+                                PriorityId = reader.GetInt16(4),
+                                DueDate = reader.GetDateTime(5),
+                                Notes = reader.IsDBNull(6) ? null : reader.GetString(6),
+                                CreationDate = reader.GetDateTime(7)
+                            });
+                        }
+                    }
+                }
+            }
+
+            return tasks;
         }
     }
 }

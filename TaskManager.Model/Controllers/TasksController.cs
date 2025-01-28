@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TaskManager.Model.DTOs;
 using TaskManager.Model.Entities;
 using TaskManager.Model.Repository;
 
@@ -6,31 +7,33 @@ namespace TaskManager.Model.Controllers
 {
     public class TasksController : BaseApiController
     {
-        private readonly IGenericRepository<Tasks> _tasksRepository; 
+        private readonly ITasksRepository _tasksRepository; 
 
-        public TasksController(IGenericRepository<Tasks> tasksRepository)
+        public TasksController(ITasksRepository tasksRepository)
         {
             _tasksRepository = tasksRepository;
         }
 
-        // GET: /tasks
-        [HttpGet]
-        public async Task<ActionResult> GetTasks(int skip = 0, int take = 20, string sortField = "Id", bool sortAscending = true)
+        [HttpPost]
+        public async Task<ActionResult> GetTasks([FromBody] TaskFilter filters)
         {
-            try
-            {
-                var (items, totalCount) = await _tasksRepository.GetOrderTasksAsync(skip, take, sortField, sortAscending);
+             var resp = await _tasksRepository.GetAll(filters);
+             return Ok(new
+             {
+                 Items = resp,
+                 TotalCount = resp.Count()
+             });
+        }
 
-                return Ok(new
-                {
-                    Items = items,
-                    TotalCount = totalCount
-                });
-            }
-            catch (Exception ex)
+        [HttpGet("test")]
+        public async Task<ActionResult> GetTasksTest()
+        {
+            var resp = await _tasksRepository.GetAll();
+            return Ok(new
             {
-                return StatusCode(500, new { Message = $"An error occurred while fetching tasks: {ex.Message}" });
-            }
+                Items = resp,
+                TotalCount = resp.Count()
+            });
         }
 
         // GET: /tasks/{id}
@@ -46,7 +49,7 @@ namespace TaskManager.Model.Controllers
         }
 
         // POST: /tasks
-        [HttpPost]
+        [HttpPost("create-task")]
         public async Task<ActionResult> CreateTask([FromBody] Tasks task)
         {
             if (task == null)

@@ -2488,9 +2488,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\luis_\\source\\repos\\TaskManagerApp\\TaskManagerApp.ViewModel\\TaskManagerApp.ViewModel.csproj",
-      "projectName": "TaskManagerApp.ViewModel",
-      "projectPath": "C:\\Users\\luis_\\source\\repos\\TaskManagerApp\\TaskManagerApp.ViewModel\\TaskManagerApp.ViewModel.csproj",
+      "projectUniqueName": "C:\\Users\\luis_\\source\\repos\\TaskManagerApp\\TaskManagerApp.ViewModel\\TaskManager.ViewModel.csproj",
+      "projectName": "TaskManager.ViewModel",
+      "projectPath": "C:\\Users\\luis_\\source\\repos\\TaskManagerApp\\TaskManagerApp.ViewModel\\TaskManager.ViewModel.csproj",
       "packagesPath": "C:\\Users\\luis_\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\luis_\\source\\repos\\TaskManagerApp\\TaskManagerApp.ViewModel\\obj\\",
       "projectStyle": "PackageReference",

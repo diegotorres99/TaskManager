@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManagerApp.View", "TaskManagerApp\TaskManagerApp.View.csproj", "{9D5EF428-942F-4ACE-9969-4707AFBD1517}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.ViewModel", "TaskManagerApp.ViewModel\TaskManager.ViewModel.csproj", "{FDFA8727-AE2A-40C0-8C14-C4FD73B252FD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManagerApp.ViewModel", "TaskManagerApp.ViewModel\TaskManagerApp.ViewModel.csproj", "{FDFA8727-AE2A-40C0-8C14-C4FD73B252FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Model", "TaskManager.Model\TaskManager.Model.csproj", "{F903856B-955E-4F8E-A84B-DE996B3BAD8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Model", "TaskManager.Model\TaskManager.Model.csproj", "{F903856B-955E-4F8E-A84B-DE996B3BAD8A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsApp1", "WinFormsApp1\WinFormsApp1.csproj", "{93CA01A6-789F-4F6C-AF15-B3D71818C9BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9D5EF428-942F-4ACE-9969-4707AFBD1517}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9D5EF428-942F-4ACE-9969-4707AFBD1517}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9D5EF428-942F-4ACE-9969-4707AFBD1517}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9D5EF428-942F-4ACE-9969-4707AFBD1517}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FDFA8727-AE2A-40C0-8C14-C4FD73B252FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FDFA8727-AE2A-40C0-8C14-C4FD73B252FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDFA8727-AE2A-40C0-8C14-C4FD73B252FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,6 +23,10 @@ Global
 		{F903856B-955E-4F8E-A84B-DE996B3BAD8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F903856B-955E-4F8E-A84B-DE996B3BAD8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F903856B-955E-4F8E-A84B-DE996B3BAD8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93CA01A6-789F-4F6C-AF15-B3D71818C9BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93CA01A6-789F-4F6C-AF15-B3D71818C9BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93CA01A6-789F-4F6C-AF15-B3D71818C9BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93CA01A6-789F-4F6C-AF15-B3D71818C9BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

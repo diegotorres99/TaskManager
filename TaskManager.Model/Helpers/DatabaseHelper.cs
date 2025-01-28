@@ -16,7 +16,6 @@ namespace TaskManager.Model.Helpers
             _connectionString = connectionString;
         }
 
-        // This method is overridden to implement the interface correctly
         public SqliteConnection GetConnection()
         {
             if (_connection == null)

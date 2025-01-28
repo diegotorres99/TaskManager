@@ -2,9 +2,6 @@ C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\bin\Debug\ne
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\bin\Debug\net8.0\TaskManager.Model.runtimeconfig.json
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\bin\Debug\net8.0\appsettings.json
-C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\bin\Debug\net8.0\Data\SeedData\StateSeedData.json
-C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\bin\Debug\net8.0\Data\SeedData\TaskSeedData.json
-C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\bin\Debug\net8.0\Data\SeedData\UserSeedData.json
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\bin\Debug\net8.0\TaskManager.Model.exe
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\bin\Debug\net8.0\TaskManagerApp.ViewModel.deps.json
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\bin\Debug\net8.0\TaskManagerApp.ViewModel.dll

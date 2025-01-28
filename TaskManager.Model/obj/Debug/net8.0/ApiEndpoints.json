@@ -3,44 +3,13 @@
     "ContainingType": "TaskManager.Model.Controllers.TasksController",
     "Method": "GetTasks",
     "RelativePath": "api/Tasks",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "skip",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "take",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "sortField",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "sortAscending",
-        "Type": "System.Boolean",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TaskManager.Model.Controllers.TasksController",
-    "Method": "CreateTask",
-    "RelativePath": "api/Tasks",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "task",
-        "Type": "TaskManager.Model.Entities.Tasks",
+        "Name": "filters",
+        "Type": "TaskManager.Model.DTOs.TaskFilter",
         "IsRequired": true
       }
     ],
@@ -100,23 +69,29 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "TaskManager.Model.Controllers.WeatherForecastController",
-    "Method": "Get",
-    "RelativePath": "WeatherForecast",
+    "ContainingType": "TaskManager.Model.Controllers.TasksController",
+    "Method": "CreateTask",
+    "RelativePath": "api/Tasks/create-task",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "task",
+        "Type": "TaskManager.Model.Entities.Tasks",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TaskManager.Model.Controllers.TasksController",
+    "Method": "GetTasksTest",
+    "RelativePath": "api/Tasks/test",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[TaskManager.Model.WeatherForecast, TaskManager.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   }
 ]
