@@ -2,6 +2,7 @@
 using System.Text;
 using System.Text.Json;
 using TaskManager.Model.DTOs;
+using TaskManager.Model.Entities;
 using TaskManager.ViewModels.Models;
 
 
@@ -13,16 +14,44 @@ namespace TaskManagerApp.ViewModel.Services
 
         public TasksService()
         {
-            // Assuming the base address of your API is already set
             _httpClient = new HttpClient
             {
                 BaseAddress = new Uri("https://localhost:7177/")
             };
         }
 
-        public async Task<List<TaskDto>> GetFilteredTasksAsync(TaskFilterDto filters)
+        public async Task<List<Tasks>> GetFilteredTasksAsync(TaskFilterDto filters)
         {
-            // Construct query parameters dynamically from the TaskFilterDto object
+            var requestUri = $"api/tasks?{BuildQueryParams(filters)}";
+
+            try
+            {
+                var response = await _httpClient.PostAsJsonAsync("api/tasks", filters);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new HttpRequestException($"Error fetching tasks: {response.ReasonPhrase}");
+                }
+
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+
+                var taskResponse = JsonSerializer.Deserialize<List<Tasks>>(jsonString, options);
+                return taskResponse ?? [];
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception in GetFilteredTasksAsync: {ex.Message}");
+                return new List<Tasks>();
+            }
+        }
+
+        private string BuildQueryParams(TaskFilterDto filters)
+        {
             var queryParams = new List<string>();
 
             if (filters.UserId.HasValue)
@@ -30,7 +59,7 @@ namespace TaskManagerApp.ViewModel.Services
             if (filters.StateId.HasValue)
                 queryParams.Add($"StateId={filters.StateId}");
             if (!string.IsNullOrEmpty(filters.PriorityId.ToString()))
-                queryParams.Add($"Priority={filters.PriorityId}");
+                queryParams.Add($"PriorityId={filters.PriorityId}");
             if (filters.DueDateStart.HasValue)
                 queryParams.Add($"DueDateStart={filters.DueDateStart.Value:yyyy-MM-dd}");
             if (filters.DueDateEnd.HasValue)
@@ -41,30 +70,7 @@ namespace TaskManagerApp.ViewModel.Services
             queryParams.Add($"SortField={filters.SortField}");
             queryParams.Add($"SortAscending={filters.SortAscending.ToString().ToLower()}");
 
-            // Combine the base URI with query parameters
-            var requestUri = $"api/tasks?{string.Join("&", queryParams)}";
-
-            try
-            {
-                // Send the POST request to the endpoint with filters in the body
-                var response = await _httpClient.PostAsJsonAsync("api/tasks", filters);
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    // Handle the error if the response is not successful
-                    throw new HttpRequestException($"Error fetching tasks: {response.ReasonPhrase}");
-                }
-
-                // Deserialize the response into a list of TaskDto
-                var taskResponse = await response.Content.ReadFromJsonAsync<TaskResponseDto>();
-                return taskResponse?.Items ?? new List<TaskDto>();
-            }
-            catch (Exception ex)
-            {
-                // Log or handle the exception
-                Console.WriteLine($"Exception in GetFilteredTasksAsync: {ex.Message}");
-                return new List<TaskDto>();
-            }
+            return string.Join("&", queryParams);
         }
 
         public async Task UpdateOrderItemAsync(TaskDto item)
@@ -109,7 +115,6 @@ namespace TaskManagerApp.ViewModel.Services
             }
             catch (Exception ex)
             {
-                // Log or handle the exception
                 Console.WriteLine($"Exception in CreateOrderItemAsync: {ex.Message}");
                 throw;
             }
@@ -130,10 +135,92 @@ namespace TaskManagerApp.ViewModel.Services
             }
             catch (Exception ex)
             {
-                // Log or handle the exception
                 Console.WriteLine($"Exception in DeleteOrderItemAsync: {ex.Message}");
                 throw;
             }
         }
+
+        // Get users asynchronously from the API
+        public async Task<List<UserDto>> GetUsersAsync()
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync("api/users");
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new HttpRequestException($"Error fetching users: {response.ReasonPhrase}");
+                }
+
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+
+                var users = JsonSerializer.Deserialize<List<UserDto>>(jsonString, options);
+                return users ?? new List<UserDto>();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception in GetUsersAsync: {ex.Message}");
+                return new List<UserDto>();
+            }
+        }
+
+        public async Task<List<StateDto>> GetStatesAsync()
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync("api/states");
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new HttpRequestException($"Error fetching states: {response.ReasonPhrase}");
+                }
+
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+
+                var states = JsonSerializer.Deserialize<List<StateDto>>(jsonString, options);
+                return states ?? new List<StateDto>();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception in GetStatesAsync: {ex.Message}");
+                return new List<StateDto>();
+            }
+        }
+
+        public async Task<List<PriorityDto>> GetPrioritiesAsync()
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync("api/priorities");
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new HttpRequestException($"Error fetching priorities: {response.ReasonPhrase}");
+                }
+
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+
+                var priorities = JsonSerializer.Deserialize<List<PriorityDto>>(jsonString, options);
+                return priorities ?? new List<PriorityDto>();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception in GetPrioritiesAsync: {ex.Message}");
+                return new List<PriorityDto>();
+            }
+        }
     }
 }
+

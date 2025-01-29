@@ -8,8 +8,8 @@ namespace TaskManager.Model.Repository
         Task<bool> Insert(Tasks tasks);
         Task<bool> Update(Tasks tasks);
         Task<bool> Delete(int id);
-        Task<IEnumerable<TaskDto>> GetAll(TaskFilter filters);
-        Task<IEnumerable<TaskDto>> GetAll();
-        Task<TaskDto> GetById(int id);
+        Task<IEnumerable<Tasks>> GetAll(TaskFilter filters);
+        Task<IEnumerable<Tasks>> GetAll();
+        Task<Tasks> GetById(int id);
     }
 }

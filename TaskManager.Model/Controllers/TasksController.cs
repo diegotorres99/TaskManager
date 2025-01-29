@@ -18,11 +18,8 @@ namespace TaskManager.Model.Controllers
         public async Task<ActionResult> GetTasks([FromBody] TaskFilter filters)
         {
              var resp = await _tasksRepository.GetAll(filters);
-             return Ok(new
-             {
-                 Items = resp,
-                 TotalCount = resp.Count()
-             });
+
+             return Ok(resp);
         }
 
         [HttpGet("test")]

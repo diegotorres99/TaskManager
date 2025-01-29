@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "ZkzNngHXV5IfQHP71H7Kmk1UFwp5St8cpVPHdOk22fE=",
+  "Hash": "z395RfKPsZAdO08P2QlfdbMby4SDnU0Vqc1y8TCSRj4=",
   "Source": "TaskManager.Model",
   "BasePath": "_content/TaskManager.Model",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }

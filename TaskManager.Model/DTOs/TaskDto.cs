@@ -10,5 +10,6 @@
         public DateTime DueDate { get; set; }
         public string? Notes { get; set; }
         public DateTime CreationDate { get; set; }
+        public string Username { get; internal set; }
     }
 }

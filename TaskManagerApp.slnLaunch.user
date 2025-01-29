@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "TaskManager.Model\\TaskManager.Model.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "TaskManager.View\\TaskManager.View.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

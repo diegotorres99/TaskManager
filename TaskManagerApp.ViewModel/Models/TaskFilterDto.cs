@@ -10,6 +10,7 @@
         public int Skip { get; set; } = 0; 
         public int Take { get; set; } = 20; 
         public string SortField { get; set; } = "Id"; 
-        public bool SortAscending { get; set; } = true; 
+        public bool SortAscending { get; set; } = true;
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using TaskManager.Model.DTOs;
+using TaskManager.Model.Entities;
 using TaskManager.ViewModels.Models;
 using TaskManagerApp.ViewModel.Services;
 
@@ -11,7 +12,7 @@ public class TasksViewModel
         _dataServiceClient = dataServiceClient;
     }
 
-    public async Task<List<TaskDto>> GetOrderItems(TaskFilterDto taskFilterDto)
+    public async Task<List<Tasks>> GetOrderItems(TaskFilterDto taskFilterDto)
     {
         var orderItems = await _dataServiceClient.GetFilteredTasksAsync(taskFilterDto);
         return orderItems;

@@ -28,7 +28,7 @@ namespace TaskManager.Model.Repository
             }
         }
 
-        public async Task<TaskDto> GetById(int id)
+        public async Task<Tasks> GetById(int id)
         {
             using (var connection = _databaseHelper.GetConnection())
             {
@@ -41,7 +41,7 @@ namespace TaskManager.Model.Repository
                     {
                         if (await reader.ReadAsync())
                         {
-                            return new TaskDto
+                            return new Tasks
                             {
                                 Id = reader.GetInt32(0),
                                 Description = reader.GetString(1),
@@ -72,7 +72,7 @@ namespace TaskManager.Model.Repository
                     command.Parameters.AddWithValue("@Description", entity.Description);
                     command.Parameters.AddWithValue("@UserId", entity.UserId);
                     command.Parameters.AddWithValue("@StateId", entity.StateId);
-                    command.Parameters.AddWithValue("@Priority", entity.Priority);
+                    command.Parameters.AddWithValue("@Priority", entity.PriorityId);
                     command.Parameters.AddWithValue("@DueDate", entity.DueDate);
                     command.Parameters.AddWithValue("@Notes", (object)entity.Notes ?? DBNull.Value);
 
@@ -96,7 +96,7 @@ namespace TaskManager.Model.Repository
                     command.Parameters.AddWithValue("@Description", entity.Description);
                     command.Parameters.AddWithValue("@UserId", entity.UserId);
                     command.Parameters.AddWithValue("@StateId", entity.StateId);
-                    command.Parameters.AddWithValue("@Priority", entity.Priority);
+                    command.Parameters.AddWithValue("@Priority", entity.PriorityId);
                     command.Parameters.AddWithValue("@DueDate", entity.DueDate);
                     command.Parameters.AddWithValue("@Notes", (object)entity.Notes ?? DBNull.Value);
 
@@ -106,7 +106,7 @@ namespace TaskManager.Model.Repository
             }
         }
 
-        public async Task <IEnumerable<TaskDto>> GetAll(TaskFilter filters)
+        public async Task<IEnumerable<Tasks>> GetAll(TaskFilter filters)
         {
             try
             {
@@ -116,7 +116,8 @@ namespace TaskManager.Model.Repository
                 {
                     await connection.OpenAsync();
 
-                    var items = new List<TaskDto>();
+                    var items = new List<Tasks>();
+
                     using (var command = new SqliteCommand(query, connection))
                     {
                         command.Parameters.AddRange(parameters.ToArray());
@@ -125,12 +126,15 @@ namespace TaskManager.Model.Repository
                         {
                             while (await reader.ReadAsync())
                             {
-                                var task = new TaskDto
+                                var task = new Tasks
                                 {
                                     Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                                    UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
-                                    StateId = reader.GetInt32(reader.GetOrdinal("StateId")),
-                                    PriorityId = reader.GetInt32(reader.GetOrdinal("PriorityId")),
+                                    //UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
+                                    Username = reader.GetString(reader.GetOrdinal("Username")), // From Users table
+                                    //StateId = reader.GetInt32(reader.GetOrdinal("StateId")),
+                                    StateName = reader.GetString(reader.GetOrdinal("StateName")), // From States table
+                                    //PriorityId = reader.GetInt32(reader.GetOrdinal("PriorityId")),
+                                    PriorityName = reader.GetString(reader.GetOrdinal("PriorityName")), // From Priorities table
                                     DueDate = reader.GetDateTime(reader.GetOrdinal("DueDate")),
                                     Description = reader.GetString(reader.GetOrdinal("Description")),
                                     Notes = reader.IsDBNull(reader.GetOrdinal("Notes")) ? null : reader.GetString(reader.GetOrdinal("Notes"))
@@ -140,7 +144,7 @@ namespace TaskManager.Model.Repository
                             }
                         }
                     }
-   
+
                     using (var countCommand = new SqliteCommand(countQuery, connection))
                     {
                         foreach (var parameter in parameters)
@@ -162,9 +166,124 @@ namespace TaskManager.Model.Repository
             }
         }
 
-        public async Task<IEnumerable<TaskDto>> GetAll()
+
+        //public async Task<IEnumerable<TaskDto>> GetAll(TaskFilter filters)
+        //{
+        //    try
+        //    {
+        //        var (query, countQuery, parameters) = FilterHelper.BuildTaskQuery(filters);
+
+        //        using (var connection = _databaseHelper.GetConnection())
+        //        {
+        //            await connection.OpenAsync();
+
+        //            var items = new List<TaskDto>();
+
+        //            using (var command = new SqliteCommand(query, connection))
+        //            {
+        //                command.Parameters.AddRange(parameters.ToArray());
+
+        //                using (var reader = await command.ExecuteReaderAsync())
+        //                {
+        //                    while (await reader.ReadAsync())
+        //                    {
+        //                        var task = new TaskDto
+        //                        {
+        //                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+        //                            UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
+        //                            Username = reader.GetString(reader.GetOrdinal("Username")), // New field
+        //                            StateId = reader.GetInt32(reader.GetOrdinal("StateId")),
+        //                            PriorityId = reader.GetInt32(reader.GetOrdinal("PriorityId")),
+        //                            DueDate = reader.GetDateTime(reader.GetOrdinal("DueDate")),
+        //                            Description = reader.GetString(reader.GetOrdinal("Description")),
+        //                            Notes = reader.IsDBNull(reader.GetOrdinal("Notes")) ? null : reader.GetString(reader.GetOrdinal("Notes"))
+        //                        };
+
+        //                        items.Add(task);
+        //                    }
+        //                }
+        //            }
+
+        //            using (var countCommand = new SqliteCommand(countQuery, connection))
+        //            {
+        //                foreach (var parameter in parameters)
+        //                {
+        //                    if (parameter.ParameterName != "@Take" && parameter.ParameterName != "@Skip")
+        //                    {
+        //                        countCommand.Parameters.Add(parameter);
+        //                    }
+        //                }
+
+        //                var totalCount = Convert.ToInt32(await countCommand.ExecuteScalarAsync());
+        //                return items;
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception($"Error fetching filtered tasks: {ex.Message}", ex);
+        //    }
+        //}
+
+        //public async Task <IEnumerable<TaskDto>> GetAll(TaskFilter filters)
+        //{
+        //    try
+        //    {
+        //        var (query, countQuery, parameters) = FilterHelper.BuildTaskQuery(filters);
+
+        //        using (var connection = _databaseHelper.GetConnection())
+        //        {
+        //            await connection.OpenAsync();
+
+        //            var items = new List<TaskDto>();
+        //            using (var command = new SqliteCommand(query, connection))
+        //            {
+        //                command.Parameters.AddRange(parameters.ToArray());
+
+        //                using (var reader = await command.ExecuteReaderAsync())
+        //                {
+        //                    while (await reader.ReadAsync())
+        //                    {
+        //                        var task = new TaskDto
+        //                        {
+        //                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+        //                            UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
+        //                            StateId = reader.GetInt32(reader.GetOrdinal("StateId")),
+        //                            PriorityId = reader.GetInt32(reader.GetOrdinal("PriorityId")),
+        //                            DueDate = reader.GetDateTime(reader.GetOrdinal("DueDate")),
+        //                            Description = reader.GetString(reader.GetOrdinal("Description")),
+        //                            Notes = reader.IsDBNull(reader.GetOrdinal("Notes")) ? null : reader.GetString(reader.GetOrdinal("Notes"))
+        //                        };
+
+        //                        items.Add(task);
+        //                    }
+        //                }
+        //            }
+
+        //            using (var countCommand = new SqliteCommand(countQuery, connection))
+        //            {
+        //                foreach (var parameter in parameters)
+        //                {
+        //                    if (parameter.ParameterName != "@Take" && parameter.ParameterName != "@Skip")
+        //                    {
+        //                        countCommand.Parameters.Add(parameter);
+        //                    }
+        //                }
+
+        //                var totalCount = Convert.ToInt32(await countCommand.ExecuteScalarAsync());
+        //                return items;
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception($"Error fetching filtered tasks: {ex.Message}", ex);
+        //    }
+        //}
+
+        public async Task<IEnumerable<Tasks>> GetAll()
         {
-            var tasks = new List<TaskDto>();
+            var tasks = new List<Tasks>();
 
             using (var connection = _databaseHelper.GetConnection())
             {
@@ -175,7 +294,7 @@ namespace TaskManager.Model.Repository
                     {
                         while (await reader.ReadAsync())
                         {
-                            tasks.Add(new TaskDto
+                            tasks.Add(new Tasks
                             {
                                 Id = reader.GetInt32(0),
                                 Description = reader.GetString(1),
@@ -193,5 +312,6 @@ namespace TaskManager.Model.Repository
 
             return tasks;
         }
+
     }
 }

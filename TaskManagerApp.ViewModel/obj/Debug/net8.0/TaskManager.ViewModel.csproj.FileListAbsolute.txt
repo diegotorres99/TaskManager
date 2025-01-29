@@ -2,6 +2,7 @@ C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\bin\Debug\ne
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\bin\Debug\net8.0\TaskManager.Model.runtimeconfig.json
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\bin\Debug\net8.0\appsettings.json
+C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\bin\Debug\net8.0\TaskManager.Model.staticwebassets.endpoints.json
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\bin\Debug\net8.0\TaskManager.Model.exe
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\bin\Debug\net8.0\TaskManager.ViewModel.deps.json
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManagerApp.ViewModel\bin\Debug\net8.0\TaskManager.ViewModel.dll
