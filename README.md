@@ -25,3 +25,13 @@
 <p align="left"> 
   <img src="https://github.com/user-attachments/assets/b4adfe0e-6ac2-43aa-aeb4-01b02a1f3374" alt="Task Manager Results" width="600"> 
 </p>
+
+## The Backend: An ASP.NET Core WebAPI service using ADO.NET </h1>
+The backend project was created using the standard ASP.NET Core Web API template, and it includes different endpoints to handle requests in the service
+
+## The Frontend: A Windows Forms app with a DevExpress Data Grid
+
+In the MainForm of the Windows Forms application, the DevExpress GridControl is bound to a VirtualServerModeSource instance. The VirtualServerModeSource handles two events to fetch data:
+
+ConfigurationChanged: Triggered when the grid's runtime configuration changes, like when a user clicks a column header to sort.
+MoreRows: Triggered when data is initially fetched and more rows are available, prompting the grid to load additional rows as the user scrolls to the bottom.
