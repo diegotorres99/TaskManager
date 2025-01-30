@@ -56,8 +56,9 @@
             barDdlState = new DevExpress.XtraBars.BarEditItem();
             repositoryItemComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             barStaticItem5 = new DevExpress.XtraBars.BarStaticItem();
-            barEditItem1 = new DevExpress.XtraBars.BarEditItem();
-            repositoryItemComboBox4 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            barDdlPriorities = new DevExpress.XtraBars.BarEditItem();
+            repositoryItemComboBox5 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            btnCleanFilters = new DevExpress.XtraBars.BarButtonItem();
             bar3 = new DevExpress.XtraBars.Bar();
             barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
@@ -69,6 +70,10 @@
             repositoryItemComboBox3 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             barEditItem6 = new DevExpress.XtraBars.BarEditItem();
             repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
+            barEditItem1 = new DevExpress.XtraBars.BarEditItem();
+            repositoryItemComboBox4 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            barEditItem2 = new DevExpress.XtraBars.BarEditItem();
+            repositoryItemTextEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             ((System.ComponentModel.ISupportInitialize)gridControl).BeginInit();
             ((System.ComponentModel.ISupportInitialize)virtualServerModeSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
@@ -79,18 +84,20 @@
             ((System.ComponentModel.ISupportInitialize)repositoryItemDateEdit2.CalendarTimeProperties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemComboBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemComboBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemComboBox4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemComboBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemComboBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemTextEdit1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemComboBox4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEdit2).BeginInit();
             SuspendLayout();
             // 
             // gridControl
             // 
             gridControl.DataSource = virtualServerModeSource;
-            gridControl.Location = new System.Drawing.Point(0, 49);
+            gridControl.Location = new System.Drawing.Point(0, 48);
             gridControl.MainView = gridView1;
             gridControl.Name = "gridControl";
-            gridControl.Size = new System.Drawing.Size(1375, 517);
+            gridControl.Size = new System.Drawing.Size(1453, 500);
             gridControl.TabIndex = 0;
             gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
             // 
@@ -174,9 +181,9 @@
             barManager1.DockControls.Add(barDockControlLeft);
             barManager1.DockControls.Add(barDockControlRight);
             barManager1.Form = this;
-            barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] { barToggleSwitchItem1, barButtonItem1, addTask, btnDelete, space, barDateStart, barLblDueDates, barStaticItem2, barDateEnd, barStaticItem3, bardDdllUser, barStaticItem4, barDdlState, barStaticItem5, barDdlPriority, barEditItem6, barEditItem1 });
-            barManager1.MaxItemId = 17;
-            barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemDateEdit1, repositoryItemDateEdit2, repositoryItemComboBox1, repositoryItemComboBox2, repositoryItemComboBox3, repositoryItemTextEdit1, repositoryItemComboBox4 });
+            barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] { barToggleSwitchItem1, barButtonItem1, addTask, btnDelete, space, barDateStart, barLblDueDates, barStaticItem2, barDateEnd, barStaticItem3, bardDdllUser, barStaticItem4, barDdlState, barStaticItem5, barDdlPriority, barEditItem6, barEditItem1, barEditItem2, barDdlPriorities, btnCleanFilters });
+            barManager1.MaxItemId = 20;
+            barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemDateEdit1, repositoryItemDateEdit2, repositoryItemComboBox1, repositoryItemComboBox2, repositoryItemComboBox3, repositoryItemTextEdit1, repositoryItemComboBox4, repositoryItemTextEdit2, repositoryItemComboBox5 });
             barManager1.StatusBar = bar3;
             // 
             // bar1
@@ -185,7 +192,7 @@
             bar1.DockCol = 0;
             bar1.DockRow = 0;
             bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-            bar1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] { new DevExpress.XtraBars.LinkPersistInfo(addTask), new DevExpress.XtraBars.LinkPersistInfo(btnDelete), new DevExpress.XtraBars.LinkPersistInfo(space), new DevExpress.XtraBars.LinkPersistInfo(barLblDueDates), new DevExpress.XtraBars.LinkPersistInfo(barDateStart), new DevExpress.XtraBars.LinkPersistInfo(barStaticItem2), new DevExpress.XtraBars.LinkPersistInfo(barDateEnd), new DevExpress.XtraBars.LinkPersistInfo(barStaticItem3), new DevExpress.XtraBars.LinkPersistInfo(bardDdllUser), new DevExpress.XtraBars.LinkPersistInfo(barStaticItem4), new DevExpress.XtraBars.LinkPersistInfo(barDdlState), new DevExpress.XtraBars.LinkPersistInfo(barStaticItem5), new DevExpress.XtraBars.LinkPersistInfo(barEditItem1) });
+            bar1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] { new DevExpress.XtraBars.LinkPersistInfo(addTask), new DevExpress.XtraBars.LinkPersistInfo(btnDelete), new DevExpress.XtraBars.LinkPersistInfo(space), new DevExpress.XtraBars.LinkPersistInfo(barLblDueDates), new DevExpress.XtraBars.LinkPersistInfo(barDateStart), new DevExpress.XtraBars.LinkPersistInfo(barStaticItem2), new DevExpress.XtraBars.LinkPersistInfo(barDateEnd), new DevExpress.XtraBars.LinkPersistInfo(barStaticItem3), new DevExpress.XtraBars.LinkPersistInfo(bardDdllUser), new DevExpress.XtraBars.LinkPersistInfo(barStaticItem4), new DevExpress.XtraBars.LinkPersistInfo(barDdlState), new DevExpress.XtraBars.LinkPersistInfo(barStaticItem5), new DevExpress.XtraBars.LinkPersistInfo(barDdlPriorities), new DevExpress.XtraBars.LinkPersistInfo(btnCleanFilters) });
             bar1.Text = "Tools";
             // 
             // addTask
@@ -204,8 +211,8 @@
             // 
             space.Id = 4;
             space.Name = "space";
-            space.Size = new System.Drawing.Size(58, 0);
-            space.Width = 58;
+            space.Size = new System.Drawing.Size(10, 0);
+            space.Width = 10;
             // 
             // barLblDueDates
             // 
@@ -220,6 +227,7 @@
             barDateStart.Id = 5;
             barDateStart.Name = "barDateStart";
             barDateStart.Size = new System.Drawing.Size(100, 0);
+            barDateStart.EditValueChanged += barDateStart_EditValueChanged;
             // 
             // repositoryItemDateEdit1
             // 
@@ -241,6 +249,7 @@
             barDateEnd.Id = 8;
             barDateEnd.Name = "barDateEnd";
             barDateEnd.Size = new System.Drawing.Size(105, 0);
+            barDateEnd.EditValueChanged += barDateEnd_EditValueChanged;
             // 
             // repositoryItemDateEdit2
             // 
@@ -262,6 +271,7 @@
             bardDdllUser.Id = 10;
             bardDdllUser.Name = "bardDdllUser";
             bardDdllUser.Size = new System.Drawing.Size(100, 0);
+            bardDdllUser.EditValueChanged += bardDdllUser_EditValueChanged;
             // 
             // repositoryItemComboBox1
             // 
@@ -281,7 +291,8 @@
             barDdlState.Edit = repositoryItemComboBox2;
             barDdlState.Id = 12;
             barDdlState.Name = "barDdlState";
-            barDdlState.Size = new System.Drawing.Size(100, 0);
+            barDdlState.Size = new System.Drawing.Size(125, 0);
+            barDdlState.EditValueChanged += barDdlState_EditValueChanged;
             // 
             // repositoryItemComboBox2
             // 
@@ -295,19 +306,27 @@
             barStaticItem5.Id = 13;
             barStaticItem5.Name = "barStaticItem5";
             // 
-            // barEditItem1
+            // barDdlPriorities
             // 
-            barEditItem1.Caption = "Prioridad de la tarea";
-            barEditItem1.Edit = repositoryItemComboBox4;
-            barEditItem1.Id = 16;
-            barEditItem1.Name = "barEditItem1";
-            barEditItem1.Size = new System.Drawing.Size(100, 0);
+            barDdlPriorities.Caption = "barEditItem3";
+            barDdlPriorities.Edit = repositoryItemComboBox5;
+            barDdlPriorities.Id = 18;
+            barDdlPriorities.Name = "barDdlPriorities";
+            barDdlPriorities.Size = new System.Drawing.Size(100, 0);
+            barDdlPriorities.EditValueChanged += barDdlPriorities_EditValueChanged_1;
             // 
-            // repositoryItemComboBox4
+            // repositoryItemComboBox5
             // 
-            repositoryItemComboBox4.AutoHeight = false;
-            repositoryItemComboBox4.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            repositoryItemComboBox4.Name = "repositoryItemComboBox4";
+            repositoryItemComboBox5.AutoHeight = false;
+            repositoryItemComboBox5.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            repositoryItemComboBox5.Name = "repositoryItemComboBox5";
+            // 
+            // btnCleanFilters
+            // 
+            btnCleanFilters.Caption = "Limpiar filtros";
+            btnCleanFilters.Id = 19;
+            btnCleanFilters.Name = "btnCleanFilters";
+            btnCleanFilters.ItemClick += btnCleanFilters_ItemClick;
             // 
             // bar3
             // 
@@ -327,15 +346,15 @@
             barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             barDockControlTop.Location = new System.Drawing.Point(0, 0);
             barDockControlTop.Manager = barManager1;
-            barDockControlTop.Size = new System.Drawing.Size(1375, 25);
+            barDockControlTop.Size = new System.Drawing.Size(1453, 25);
             // 
             // barDockControlBottom
             // 
             barDockControlBottom.CausesValidation = false;
             barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            barDockControlBottom.Location = new System.Drawing.Point(0, 572);
+            barDockControlBottom.Location = new System.Drawing.Point(0, 570);
             barDockControlBottom.Manager = barManager1;
-            barDockControlBottom.Size = new System.Drawing.Size(1375, 20);
+            barDockControlBottom.Size = new System.Drawing.Size(1453, 20);
             // 
             // barDockControlLeft
             // 
@@ -343,15 +362,15 @@
             barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             barDockControlLeft.Location = new System.Drawing.Point(0, 25);
             barDockControlLeft.Manager = barManager1;
-            barDockControlLeft.Size = new System.Drawing.Size(0, 547);
+            barDockControlLeft.Size = new System.Drawing.Size(0, 545);
             // 
             // barDockControlRight
             // 
             barDockControlRight.CausesValidation = false;
             barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            barDockControlRight.Location = new System.Drawing.Point(1375, 25);
+            barDockControlRight.Location = new System.Drawing.Point(1453, 25);
             barDockControlRight.Manager = barManager1;
-            barDockControlRight.Size = new System.Drawing.Size(0, 547);
+            barDockControlRight.Size = new System.Drawing.Size(0, 545);
             // 
             // barToggleSwitchItem1
             // 
@@ -391,11 +410,37 @@
             repositoryItemTextEdit1.AutoHeight = false;
             repositoryItemTextEdit1.Name = "repositoryItemTextEdit1";
             // 
+            // barEditItem1
+            // 
+            barEditItem1.Caption = "Prioridad de la tarea";
+            barEditItem1.Edit = repositoryItemComboBox4;
+            barEditItem1.Id = 16;
+            barEditItem1.Name = "barEditItem1";
+            barEditItem1.Size = new System.Drawing.Size(100, 0);
+            // 
+            // repositoryItemComboBox4
+            // 
+            repositoryItemComboBox4.AutoHeight = false;
+            repositoryItemComboBox4.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            repositoryItemComboBox4.Name = "repositoryItemComboBox4";
+            // 
+            // barEditItem2
+            // 
+            barEditItem2.Caption = "barEditItem2";
+            barEditItem2.Edit = repositoryItemTextEdit2;
+            barEditItem2.Id = 17;
+            barEditItem2.Name = "barEditItem2";
+            // 
+            // repositoryItemTextEdit2
+            // 
+            repositoryItemTextEdit2.AutoHeight = false;
+            repositoryItemTextEdit2.Name = "repositoryItemTextEdit2";
+            // 
             // XfrmMain
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1375, 592);
+            ClientSize = new System.Drawing.Size(1453, 590);
             Controls.Add(gridControl);
             Controls.Add(barDockControlLeft);
             Controls.Add(barDockControlRight);
@@ -414,9 +459,11 @@
             ((System.ComponentModel.ISupportInitialize)repositoryItemDateEdit2).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemComboBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemComboBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemComboBox4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemComboBox5).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemComboBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemTextEdit1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemComboBox4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEdit2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -463,5 +510,10 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit1;
         private DevExpress.XtraBars.BarEditItem barEditItem1;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox4;
+        private DevExpress.XtraBars.BarEditItem barDdlPriorities;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox5;
+        private DevExpress.XtraBars.BarEditItem barEditItem2;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit2;
+        private DevExpress.XtraBars.BarButtonItem btnCleanFilters;
     }
 }

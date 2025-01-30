@@ -20,6 +20,9 @@ namespace TaskManager.Model.Extensions
                 return new DatabaseHelper(connectionString);
             });
             services.AddScoped<ITasksRepository, TasksRepository>();
+            services.AddScoped<IUsersRepository, UsersRepository>();
+            services.AddScoped<IStatesRepository, StateRepository>();
+            services.AddScoped<IPrioritiesRepository, PrioritiesRepository>();
 
             return services;
         }

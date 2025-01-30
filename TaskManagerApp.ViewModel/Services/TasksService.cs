@@ -3,8 +3,8 @@ using System.Text;
 using System.Text.Json;
 using TaskManager.Model.DTOs;
 using TaskManager.Model.Entities;
+using TaskManager.ViewModel.Helpers;
 using TaskManager.ViewModels.Models;
-
 
 namespace TaskManagerApp.ViewModel.Services
 {
@@ -14,9 +14,13 @@ namespace TaskManagerApp.ViewModel.Services
 
         public TasksService()
         {
+            var configuration = Settings.LoadConfiguration();
+            string baseUrl = configuration["ApiSettings:BaseUrl"] 
+                ?? throw new Exception("BaseUrl not found in appsettings.json");
+
             _httpClient = new HttpClient
             {
-                BaseAddress = new Uri("https://localhost:7177/")
+                BaseAddress = new Uri(baseUrl)
             };
         }
 
@@ -140,87 +144,6 @@ namespace TaskManagerApp.ViewModel.Services
             }
         }
 
-        // Get users asynchronously from the API
-        public async Task<List<UserDto>> GetUsersAsync()
-        {
-            try
-            {
-                var response = await _httpClient.GetAsync("api/users");
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    throw new HttpRequestException($"Error fetching users: {response.ReasonPhrase}");
-                }
-
-                var jsonString = await response.Content.ReadAsStringAsync();
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                };
-
-                var users = JsonSerializer.Deserialize<List<UserDto>>(jsonString, options);
-                return users ?? new List<UserDto>();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Exception in GetUsersAsync: {ex.Message}");
-                return new List<UserDto>();
-            }
-        }
-
-        public async Task<List<StateDto>> GetStatesAsync()
-        {
-            try
-            {
-                var response = await _httpClient.GetAsync("api/states");
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    throw new HttpRequestException($"Error fetching states: {response.ReasonPhrase}");
-                }
-
-                var jsonString = await response.Content.ReadAsStringAsync();
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                };
-
-                var states = JsonSerializer.Deserialize<List<StateDto>>(jsonString, options);
-                return states ?? new List<StateDto>();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Exception in GetStatesAsync: {ex.Message}");
-                return new List<StateDto>();
-            }
-        }
-
-        public async Task<List<PriorityDto>> GetPrioritiesAsync()
-        {
-            try
-            {
-                var response = await _httpClient.GetAsync("api/priorities");
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    throw new HttpRequestException($"Error fetching priorities: {response.ReasonPhrase}");
-                }
-
-                var jsonString = await response.Content.ReadAsStringAsync();
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                };
-
-                var priorities = JsonSerializer.Deserialize<List<PriorityDto>>(jsonString, options);
-                return priorities ?? new List<PriorityDto>();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Exception in GetPrioritiesAsync: {ex.Message}");
-                return new List<PriorityDto>();
-            }
-        }
     }
 }
 

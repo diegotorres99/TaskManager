@@ -1,9 +1,9 @@
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManager.View\bin\Debug\net8.0-windows\TaskManager.Model.deps.json
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManager.View\bin\Debug\net8.0-windows\TaskManager.Model.runtimeconfig.json
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManager.View\bin\Debug\net8.0-windows\appsettings.Development.json
-C:\Users\luis_\source\repos\TaskManagerApp\TaskManager.View\bin\Debug\net8.0-windows\appsettings.json
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManager.View\bin\Debug\net8.0-windows\TaskManager.Model.staticwebassets.endpoints.json
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManager.View\bin\Debug\net8.0-windows\TaskManager.Model.exe
+C:\Users\luis_\source\repos\TaskManagerApp\TaskManager.View\bin\Debug\net8.0-windows\appsettings.json
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManager.View\bin\Debug\net8.0-windows\TaskManager.View.exe
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManager.View\bin\Debug\net8.0-windows\TaskManager.View.dll.config
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManager.View\bin\Debug\net8.0-windows\TaskManager.View.deps.json

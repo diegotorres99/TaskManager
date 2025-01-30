@@ -1,18 +1,11 @@
 ﻿using DevExpress.Data;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using TaskManager.ViewModels.Models;
 using TaskManagerApp.ViewModel.Services;
 
-namespace TaskManager.View
+namespace TaskManager.View.VirtualServer
 {
-    public class DataFetchResult
-    {
-        public List<Models.Tasks> Items { get; set; } = null!;
-        public int TotalCount { get; set; }
-    }
-
     // This type is instantiated each time a configuration change in the virtual server
     // mode source takes place. It receives the configuration information and handles
     // the parts of it that are relevant to the data loading process.
@@ -20,7 +13,7 @@ namespace TaskManager.View
     {
         private readonly TasksService _dataServiceClient;
         public int BatchSize { get; set; } = 40;
-        public string SortField { get; set; } = "Id";
+        public string SortField { get; set; } = "DueDate";
         public bool SortAscending { get; set; } = true;
 
         public VirtualServerModeDataLoader(VirtualServerModeConfigurationInfo configurationInfo, TasksService dataServiceClient)
@@ -47,9 +40,9 @@ namespace TaskManager.View
                     SortAscending = SortAscending,
                     DueDateStart = pFilters.DueDateStart,
                     DueDateEnd = pFilters.DueDateEnd,
-                    PriorityId = 1,
-                    StateId = 1,
-                    UserId = 1
+                    PriorityId = pFilters.PriorityId,
+                    StateId = pFilters.StateId,
+                    UserId = pFilters.UserId,
                 };
 
                 var dataFetchResult = await _dataServiceClient.GetFilteredTasksAsync(filters);
