@@ -16,7 +16,7 @@ namespace TaskManager.View
         private readonly UsersService _usersService;
         private readonly StatesServices _statesService;
         private readonly PrioritiesService _prioritiesService;
-        private VirtualServerModeDataLoader? loader;
+        private VirtualServerModeDataLoader loader;
 
         public XfrmMain()
         {
@@ -92,6 +92,8 @@ namespace TaskManager.View
         }
         private async Task LoadDataWithCustomFilters()
         {
+            if (loader == null) return;
+
             var selectedPriority = this.barDdlPriorities.EditValue as PriorityDto;
             var selectedState = this.barDdlState.EditValue as StateDto;
             var selectedUser = this.bardDdllUser.EditValue as UserDto;
@@ -106,12 +108,12 @@ namespace TaskManager.View
             };
 
             var result = await _tasksService.GetFilteredTasksAsync(filters);
-
             this.gridControl.DataSource = result;
+
         }
-        private void VirtualServerModeSource_MoreRows(object? sender, DevExpress.Data.VirtualServerModeRowsEventArgs e)
+        private void VirtualServerModeSource_MoreRows(object sender, DevExpress.Data.VirtualServerModeRowsEventArgs e)
         {
-            if (loader is not null)
+            if (loader != null)
             {
                 DateTime? startDate = this.barDateStart.EditValue as DateTime?;
                 DateTime? endDate = this.barDateEnd.EditValue as DateTime?;
@@ -130,11 +132,11 @@ namespace TaskManager.View
         }
         private async void bardDdllUser_EditValueChanged(object sender, EventArgs e)
         {
-            await LoadDataWithCustomFilters();
+           await LoadDataWithCustomFilters();
         }
         private async void barDdlState_EditValueChanged(object sender, EventArgs e)
         {
-            await LoadDataWithCustomFilters();
+           await LoadDataWithCustomFilters();
         }
         private async void barDateStart_EditValueChanged(object sender, EventArgs e)
         {
@@ -154,7 +156,7 @@ namespace TaskManager.View
         }
         private async void barDdlPriorities_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            await LoadDataWithCustomFilters();
+           await LoadDataWithCustomFilters();
         }
         private async void barDdlPriorities_EditValueChanged_1(object sender, EventArgs e)
         {

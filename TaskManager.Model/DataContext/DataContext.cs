@@ -1,5 +1,4 @@
 ﻿using Microsoft.Data.Sqlite;
-using System;
 
 namespace TaskManager.Model.DataContext
 {
@@ -16,18 +15,16 @@ namespace TaskManager.Model.DataContext
             _connectionString = connectionString;
         }
 
-        // This method opens the connection to the SQLite database
         public SqliteConnection GetConnection()
         {
             if (_connection == null)
             {
                 _connection = new SqliteConnection(_connectionString);
-                _connection.Open(); // Open the connection when it's first accessed
+                _connection.Open(); 
             }
             return _connection;
         }
 
-        // Dispose pattern for cleanup
         public void Dispose()
         {
             if (_connection != null)

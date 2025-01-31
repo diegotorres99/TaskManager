@@ -68,8 +68,8 @@ namespace TaskManager.Model.Helpers
                 parameters.Add(new SqliteParameter("@DueDateEnd", filters.DueDateEnd.Value));
             }
 
-            //query += $" ORDER BY {filters.SortField} {(filters.SortAscending ? "ASC" : "DESC")}";
-            query += $" ORDER BY DueDate  {(filters.SortAscending ? "ASC" : "DESC")}";
+            query += $" ORDER BY {filters.SortField} {(filters.SortAscending ? "ASC" : "DESC")}";
+            //query += $" ORDER BY DueDate  {(filters.SortAscending ? "ASC" : "DESC")}";
             query += " LIMIT @Take OFFSET @Skip";
             parameters.Add(new SqliteParameter("@Take", filters.Take));
             parameters.Add(new SqliteParameter("@Skip", filters.Skip));
