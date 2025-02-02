@@ -38,7 +38,7 @@
             colPriority = new DevExpress.XtraGrid.Columns.GridColumn();
             colDueDate = new DevExpress.XtraGrid.Columns.GridColumn();
             colNotes = new DevExpress.XtraGrid.Columns.GridColumn();
-            barManager1 = new DevExpress.XtraBars.BarManager(components);
+            barManager = new DevExpress.XtraBars.BarManager(components);
             bar1 = new DevExpress.XtraBars.Bar();
             addTask = new DevExpress.XtraBars.BarButtonItem();
             btnDelete = new DevExpress.XtraBars.BarButtonItem();
@@ -77,7 +77,7 @@
             ((System.ComponentModel.ISupportInitialize)gridControl).BeginInit();
             ((System.ComponentModel.ISupportInitialize)virtualServerModeSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)barManager1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)barManager).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemDateEdit1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemDateEdit1.CalendarTimeProperties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemDateEdit2).BeginInit();
@@ -100,6 +100,7 @@
             gridControl.Size = new System.Drawing.Size(1453, 500);
             gridControl.TabIndex = 0;
             gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
+            gridControl.DoubleClick += gridControl_DoubleClick;
             // 
             // virtualServerModeSource
             // 
@@ -173,18 +174,18 @@
             colNotes.VisibleIndex = 5;
             colNotes.Width = 94;
             // 
-            // barManager1
+            // barManager
             // 
-            barManager1.Bars.AddRange(new DevExpress.XtraBars.Bar[] { bar1, bar3 });
-            barManager1.DockControls.Add(barDockControlTop);
-            barManager1.DockControls.Add(barDockControlBottom);
-            barManager1.DockControls.Add(barDockControlLeft);
-            barManager1.DockControls.Add(barDockControlRight);
-            barManager1.Form = this;
-            barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] { barToggleSwitchItem1, barButtonItem1, addTask, btnDelete, space, barDateStart, barLblDueDates, barStaticItem2, barDateEnd, barStaticItem3, bardDdllUser, barStaticItem4, barDdlState, barStaticItem5, barDdlPriority, barEditItem6, barEditItem1, barEditItem2, barDdlPriorities, btnCleanFilters });
-            barManager1.MaxItemId = 20;
-            barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemDateEdit1, repositoryItemDateEdit2, repositoryItemComboBox1, repositoryItemComboBox2, repositoryItemComboBox3, repositoryItemTextEdit1, repositoryItemComboBox4, repositoryItemTextEdit2, repositoryItemComboBox5 });
-            barManager1.StatusBar = bar3;
+            barManager.Bars.AddRange(new DevExpress.XtraBars.Bar[] { bar1, bar3 });
+            barManager.DockControls.Add(barDockControlTop);
+            barManager.DockControls.Add(barDockControlBottom);
+            barManager.DockControls.Add(barDockControlLeft);
+            barManager.DockControls.Add(barDockControlRight);
+            barManager.Form = this;
+            barManager.Items.AddRange(new DevExpress.XtraBars.BarItem[] { barToggleSwitchItem1, barButtonItem1, addTask, btnDelete, space, barDateStart, barLblDueDates, barStaticItem2, barDateEnd, barStaticItem3, bardDdllUser, barStaticItem4, barDdlState, barStaticItem5, barDdlPriority, barEditItem6, barEditItem1, barEditItem2, barDdlPriorities, btnCleanFilters });
+            barManager.MaxItemId = 20;
+            barManager.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemDateEdit1, repositoryItemDateEdit2, repositoryItemComboBox1, repositoryItemComboBox2, repositoryItemComboBox3, repositoryItemTextEdit1, repositoryItemComboBox4, repositoryItemTextEdit2, repositoryItemComboBox5 });
+            barManager.StatusBar = bar3;
             // 
             // bar1
             // 
@@ -206,13 +207,14 @@
             btnDelete.Caption = "Eliminar Tarea";
             btnDelete.Id = 3;
             btnDelete.Name = "btnDelete";
+            btnDelete.ItemClick += btnDelete_ItemClick;
             // 
             // space
             // 
             space.Id = 4;
             space.Name = "space";
-            space.Size = new System.Drawing.Size(10, 0);
-            space.Width = 10;
+            space.Size = new System.Drawing.Size(1, 0);
+            space.Width = 1;
             // 
             // barLblDueDates
             // 
@@ -323,7 +325,7 @@
             // 
             // btnCleanFilters
             // 
-            btnCleanFilters.Caption = "Limpiar filtros";
+            btnCleanFilters.Caption = "Limpiar";
             btnCleanFilters.Id = 19;
             btnCleanFilters.Name = "btnCleanFilters";
             btnCleanFilters.ItemClick += btnCleanFilters_ItemClick;
@@ -345,7 +347,7 @@
             barDockControlTop.CausesValidation = false;
             barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            barDockControlTop.Manager = barManager1;
+            barDockControlTop.Manager = barManager;
             barDockControlTop.Size = new System.Drawing.Size(1453, 25);
             // 
             // barDockControlBottom
@@ -353,7 +355,7 @@
             barDockControlBottom.CausesValidation = false;
             barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             barDockControlBottom.Location = new System.Drawing.Point(0, 570);
-            barDockControlBottom.Manager = barManager1;
+            barDockControlBottom.Manager = barManager;
             barDockControlBottom.Size = new System.Drawing.Size(1453, 20);
             // 
             // barDockControlLeft
@@ -361,7 +363,7 @@
             barDockControlLeft.CausesValidation = false;
             barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             barDockControlLeft.Location = new System.Drawing.Point(0, 25);
-            barDockControlLeft.Manager = barManager1;
+            barDockControlLeft.Manager = barManager;
             barDockControlLeft.Size = new System.Drawing.Size(0, 545);
             // 
             // barDockControlRight
@@ -369,7 +371,7 @@
             barDockControlRight.CausesValidation = false;
             barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             barDockControlRight.Location = new System.Drawing.Point(1453, 25);
-            barDockControlRight.Manager = barManager1;
+            barDockControlRight.Manager = barManager;
             barDockControlRight.Size = new System.Drawing.Size(0, 545);
             // 
             // barToggleSwitchItem1
@@ -452,7 +454,7 @@
             ((System.ComponentModel.ISupportInitialize)gridControl).EndInit();
             ((System.ComponentModel.ISupportInitialize)virtualServerModeSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)barManager1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)barManager).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemDateEdit1.CalendarTimeProperties).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemDateEdit1).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemDateEdit2.CalendarTimeProperties).EndInit();
@@ -473,7 +475,7 @@
         private DevExpress.XtraGrid.GridControl gridControl;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.Data.VirtualServerModeSource virtualServerModeSource;
-        private DevExpress.XtraBars.BarManager barManager1;
+        private DevExpress.XtraBars.BarManager barManager;
         private DevExpress.XtraBars.Bar bar1;
         private DevExpress.XtraBars.Bar bar3;
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;

@@ -78,6 +78,7 @@ namespace TaskManager.Model.Repository
                 const string query = "DELETE FROM Tasks WHERE id = @Id";
                 using (var command = new SqliteCommand(query, connection))
                 {
+                    await connection.OpenAsync();
                     command.Parameters.AddWithValue("@Id", id);
                     var result = await command.ExecuteNonQueryAsync();
                     return result > 0;
@@ -89,26 +90,17 @@ namespace TaskManager.Model.Repository
         {
             using (var connection = _databaseHelper.GetConnection())
             {
-                const string query = "SELECT Id, Description, UserId, StateId, Priority, DueDate, Notes, CreationDate FROM Tasks WHERE Id = @Id";
+                const string query = "SELECT Id FROM Tasks WHERE Id = @Id";
                 using (var command = new SqliteCommand(query, connection))
                 {
+                    await connection.OpenAsync();
                     command.Parameters.AddWithValue("@Id", id);
 
                     using (var reader = await command.ExecuteReaderAsync())
                     {
                         if (await reader.ReadAsync())
                         {
-                            return new Tasks
-                            {
-                                Id = reader.GetInt32(0),
-                                Description = reader.GetString(1),
-                                UserId = reader.GetInt32(2),
-                                StateId = reader.GetInt32(3),
-                                PriorityId = reader.GetInt32(4),
-                                DueDate = reader.GetDateTime(5),
-                                Notes = reader.IsDBNull(6) ? null : reader.GetString(6),
-                                CreationDate = reader.GetDateTime(7)
-                            };
+                            return new Tasks();
                         }
                     }
                 }

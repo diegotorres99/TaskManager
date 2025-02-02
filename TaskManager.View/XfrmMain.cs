@@ -1,8 +1,11 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraGrid.Views.Grid;
 using System;
 using System.Threading.Tasks;
 using TaskManager.Model.DTOs;
+using TaskManager.Model.Entities;
 using TaskManager.View.VirtualServer;
 using TaskManager.ViewModel.Services;
 using TaskManager.ViewModels.Models;
@@ -26,6 +29,7 @@ namespace TaskManager.View
             _prioritiesService = new PrioritiesService();
             _statesService = new StatesServices();
             InitializeFilterData();
+
         }
 
         private async void InitializeFilterData()
@@ -109,7 +113,6 @@ namespace TaskManager.View
 
             var result = await _tasksService.GetFilteredTasksAsync(filters);
             this.gridControl.DataSource = result;
-
         }
         private void VirtualServerModeSource_MoreRows(object sender, DevExpress.Data.VirtualServerModeRowsEventArgs e)
         {
@@ -132,11 +135,11 @@ namespace TaskManager.View
         }
         private async void bardDdllUser_EditValueChanged(object sender, EventArgs e)
         {
-           await LoadDataWithCustomFilters();
+            await LoadDataWithCustomFilters();
         }
         private async void barDdlState_EditValueChanged(object sender, EventArgs e)
         {
-           await LoadDataWithCustomFilters();
+            await LoadDataWithCustomFilters();
         }
         private async void barDateStart_EditValueChanged(object sender, EventArgs e)
         {
@@ -156,11 +159,48 @@ namespace TaskManager.View
         }
         private async void barDdlPriorities_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-           await LoadDataWithCustomFilters();
+            await LoadDataWithCustomFilters();
         }
         private async void barDdlPriorities_EditValueChanged_1(object sender, EventArgs e)
         {
             await LoadDataWithCustomFilters();
+        }
+        private async void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (gridControl.FocusedView is ColumnView view &&
+            view.GetFocusedRow() is Tasks orderItem)
+            {
+                await _tasksService.DeleteOrderItemAsync(orderItem.Id);
+                view.RefreshData();
+            }
+        }
+
+        private async void gridControl_DoubleClick(object sender, EventArgs e)
+        {
+            if (sender is GridView view)
+            {
+                if (view.FocusedRowObject is Tasks oi)
+                {
+                    var editResult = XfrmEditForm.EditItem(oi);
+
+                    var editResultDto = new TaskDto()
+                    {
+                       Id = editResult.item.Id,
+                       Description = editResult.item.Description,
+                       DueDate = editResult.item.DueDate,  
+                       Notes = editResult.item.Notes,
+                       PriorityId = editResult.item.PriorityId,
+                       StateId = editResult.item.StateId,
+                       UserId = editResult.item.UserId,
+                    };
+
+                    if (editResult.changesSaved)
+                    {
+                        await _tasksService.UpdateOrderItemAsync(editResultDto);
+                        view.RefreshData();
+                    }
+                }
+            }
         }
     }
 }

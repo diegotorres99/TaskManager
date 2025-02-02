@@ -79,7 +79,7 @@ namespace TaskManagerApp.ViewModel.Services
 
         public async Task UpdateOrderItemAsync(TaskDto item)
         {
-            var requestUri = $"api/orderitems/{item.Id}";
+            var requestUri = $"api/tasks/{item.Id}";
 
             try
             {
@@ -95,7 +95,6 @@ namespace TaskManagerApp.ViewModel.Services
             }
             catch (Exception ex)
             {
-                // Log or handle the exception
                 Console.WriteLine($"Exception in UpdateOrderItemAsync: {ex.Message}");
                 throw;
             }
@@ -126,7 +125,7 @@ namespace TaskManagerApp.ViewModel.Services
 
         public async Task DeleteOrderItemAsync(int id)
         {
-            var requestUri = $"api/orderitems/{id}";
+            var requestUri = $"api/tasks/{id}";
 
             try
             {
