@@ -100,7 +100,6 @@
             gridControl.Size = new System.Drawing.Size(1453, 500);
             gridControl.TabIndex = 0;
             gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
-            gridControl.DoubleClick += gridControl_DoubleClick;
             // 
             // virtualServerModeSource
             // 
@@ -113,6 +112,7 @@
             gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colDescription, colUser, colState, colPriority, colDueDate, colNotes });
             gridView1.GridControl = gridControl;
             gridView1.Name = "gridView1";
+            gridView1.DoubleClick += gridControl_DoubleClick;
             // 
             // colDescription
             // 

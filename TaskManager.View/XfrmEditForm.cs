@@ -37,7 +37,7 @@ namespace TaskManager.View
                 UserId = orderItem.UserId,
                 Username = orderItem.Username
             };
-            form.orderITaskBindingSource.DataSource = clonedItem;
+            form.tasksBindingSource.DataSource = clonedItem;
             if (form.ShowDialog() == DialogResult.OK)
             {
                 return (true, clonedItem);
