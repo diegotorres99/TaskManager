@@ -309,6 +309,7 @@ C:\Users\luis_\source\repos\TaskManagerApp\TaskManager.View\bin\Debug\net8.0-win
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManager.View\bin\Debug\net8.0-windows\TaskManager.ViewModel.pdb
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManager.View\bin\Debug\net8.0-windows\TaskManager.Model.pdb
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManager.View\obj\Debug\net8.0-windows\TaskManager.View.csproj.AssemblyReference.cache
+C:\Users\luis_\source\repos\TaskManagerApp\TaskManager.View\obj\Debug\net8.0-windows\TaskManager.View.XfrmEditForm.resources
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManager.View\obj\Debug\net8.0-windows\TaskManager.View.XfrmMain.resources
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManager.View\obj\Debug\net8.0-windows\TaskManager.View.csproj.GenerateResource.cache
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManager.View\obj\Debug\net8.0-windows\TaskManager.View.GeneratedMSBuildEditorConfig.editorconfig
@@ -322,4 +323,3 @@ C:\Users\luis_\source\repos\TaskManagerApp\TaskManager.View\obj\Debug\net8.0-win
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManager.View\obj\Debug\net8.0-windows\TaskManager.View.pdb
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManager.View\obj\Debug\net8.0-windows\TaskManager.View.genruntimeconfig.cache
 C:\Users\luis_\source\repos\TaskManagerApp\TaskManager.View\obj\Debug\net8.0-windows\ref\TaskManager.View.dll
-C:\Users\luis_\source\repos\TaskManagerApp\TaskManager.View\obj\Debug\net8.0-windows\TaskManager.View.XfrmEditForm.resources

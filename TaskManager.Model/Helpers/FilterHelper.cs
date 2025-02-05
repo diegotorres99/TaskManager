@@ -13,9 +13,12 @@ namespace TaskManager.Model.Helpers
                     Tasks.Description, 
                     Tasks.Notes, 
                     Tasks.DueDate, 
+                    Users.id as UserId,
                     Users.Name AS Username,
+                    States.id AS StateId, 
                     States.Name AS StateName, 
-                    Priorities.Name AS PriorityName
+                    Priorities.Name AS PriorityName,
+                    Priorities.id AS PriorityId
                   FROM Tasks 
                   INNER JOIN Users ON Tasks.UserId = Users.id
                   INNER JOIN States ON Tasks.StateId = States.id

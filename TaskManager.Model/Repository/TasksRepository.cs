@@ -38,8 +38,11 @@ namespace TaskManager.Model.Repository
                                 {
                                     Id = reader.GetInt32(reader.GetOrdinal("Id")),
                                     Username = reader.GetString(reader.GetOrdinal("Username")), 
+                                    UserId = reader.GetInt32(reader.GetOrdinal("UserId")), 
                                     StateName = reader.GetString(reader.GetOrdinal("StateName")), 
-                                    PriorityName = reader.GetString(reader.GetOrdinal("PriorityName")), 
+                                    StateId = reader.GetInt32(reader.GetOrdinal("StateId")), 
+                                    PriorityName = reader.GetString(reader.GetOrdinal("PriorityName")),
+                                    PriorityId = reader.GetInt32(reader.GetOrdinal("PriorityId")),
                                     DueDate = reader.GetDateTime(reader.GetOrdinal("DueDate")),
                                     Description = reader.GetString(reader.GetOrdinal("Description")),
                                     Notes = reader.IsDBNull(reader.GetOrdinal("Notes")) ? null : reader.GetString(reader.GetOrdinal("Notes"))
@@ -114,14 +117,15 @@ namespace TaskManager.Model.Repository
             using (var connection = _databaseHelper.GetConnection())
             {
                 const string query = @"
-                    INSERT INTO Tasks (Description, UserId, StateId, Priority, DueDate, Notes) 
-                    VALUES (@Description, @UserId, @StateId, @Priority, @DueDate, @Notes)";
+                    INSERT INTO Tasks (Description, UserId, StateId, PriorityId, DueDate, Notes) 
+                    VALUES (@Description, @UserId, @StateId, @PriorityId, @DueDate, @Notes)";
                 using (var command = new SqliteCommand(query, connection))
                 {
+                    await connection.OpenAsync();
                     command.Parameters.AddWithValue("@Description", entity.Description);
                     command.Parameters.AddWithValue("@UserId", entity.UserId);
                     command.Parameters.AddWithValue("@StateId", entity.StateId);
-                    command.Parameters.AddWithValue("@Priority", entity.PriorityId);
+                    command.Parameters.AddWithValue("@PriorityId", entity.PriorityId);
                     command.Parameters.AddWithValue("@DueDate", entity.DueDate);
                     command.Parameters.AddWithValue("@Notes", (object)entity.Notes ?? DBNull.Value);
 
@@ -137,15 +141,16 @@ namespace TaskManager.Model.Repository
             {
                 const string query = @"
                     UPDATE Tasks
-                    SET Description = @Description, UserId = @UserId, StateId = @StateId, Priority = @Priority, DueDate = @DueDate, Notes = @Notes
+                    SET Description = @Description, UserId = @UserId, StateId = @StateId, PriorityId = @PriorityId, DueDate = @DueDate, Notes = @Notes
                     WHERE Id = @Id";
                 using (var command = new SqliteCommand(query, connection))
                 {
+                    await connection.OpenAsync();
                     command.Parameters.AddWithValue("@Id", entity.Id);
                     command.Parameters.AddWithValue("@Description", entity.Description);
                     command.Parameters.AddWithValue("@UserId", entity.UserId);
                     command.Parameters.AddWithValue("@StateId", entity.StateId);
-                    command.Parameters.AddWithValue("@Priority", entity.PriorityId);
+                    command.Parameters.AddWithValue("@PriorityId", entity.PriorityId);
                     command.Parameters.AddWithValue("@DueDate", entity.DueDate);
                     command.Parameters.AddWithValue("@Notes", (object)entity.Notes ?? DBNull.Value);
 

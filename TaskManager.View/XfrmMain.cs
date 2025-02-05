@@ -170,35 +170,58 @@ namespace TaskManager.View
             if (gridControl.FocusedView is ColumnView view &&
             view.GetFocusedRow() is Tasks orderItem)
             {
-                await _tasksService.DeleteOrderItemAsync(orderItem.Id);
+                await _tasksService.DeleteTaskAsync(orderItem.Id);
                 view.RefreshData();
             }
         }
-
         private async void gridControl_DoubleClick(object sender, EventArgs e)
         {
             if (sender is GridView view)
             {
                 if (view.FocusedRowObject is Tasks oi)
                 {
-                    var editResult = XfrmEditForm.EditItem(oi);
+                    var editForm = new XfrmEditForm();
+                    var editResult = editForm.EditItem(oi);
 
                     var editResultDto = new TaskDto()
                     {
-                       Id = editResult.item.Id,
-                       Description = editResult.item.Description,
-                       DueDate = editResult.item.DueDate,  
-                       Notes = editResult.item.Notes,
-                       PriorityId = editResult.item.PriorityId,
-                       StateId = editResult.item.StateId,
-                       UserId = editResult.item.UserId,
+                        Id = editResult.item.Id,
+                        Description = editResult.item.Description,
+                        DueDate = editResult.item.DueDate,
+                        Notes = editResult.item.Notes,
+                        PriorityId = editResult.item.PriorityId,
+                        StateId = editResult.item.StateId,
+                        UserId = editResult.item.UserId,
                     };
 
                     if (editResult.changesSaved)
                     {
-                        await _tasksService.UpdateOrderItemAsync(editResultDto);
+                        await _tasksService.UpdateTaskAsync(editResultDto);
                         view.RefreshData();
                     }
+                }
+            }
+        }
+        private async void addTask_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (gridControl.FocusedView is ColumnView view)
+            {
+                var createResult = XfrmEditForm.CreateItem();
+                if (createResult.changesSaved)
+                {
+                    var createResultDto = new TaskDto()
+                    {
+                        Id = createResult.item.Id,
+                        Description = createResult.item.Description,
+                        DueDate = createResult.item.DueDate,
+                        Notes = createResult.item.Notes,
+                        PriorityId = createResult.item.PriorityId,
+                        StateId = createResult.item.StateId,
+                        UserId = createResult.item.UserId,
+                    };
+
+                    await _tasksService.CreateTaskAsync(createResultDto);
+                    view.RefreshData();
                 }
             }
         }

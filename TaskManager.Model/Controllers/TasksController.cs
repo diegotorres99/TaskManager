@@ -22,17 +22,6 @@ namespace TaskManager.Model.Controllers
              return Ok(resp);
         }
 
-        [HttpGet("test")]
-        public async Task<ActionResult> GetTasksTest()
-        {
-            var resp = await _tasksRepository.GetAll();
-            return Ok(new
-            {
-                Items = resp,
-                TotalCount = resp.Count()
-            });
-        }
-
         [HttpGet("{id}")]
         public async Task<ActionResult> GetTask(int id)
         {

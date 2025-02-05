@@ -201,6 +201,7 @@
             addTask.Caption = "Agregar Tarea";
             addTask.Id = 2;
             addTask.Name = "addTask";
+            addTask.ItemClick += addTask_ItemClick;
             // 
             // btnDelete
             // 

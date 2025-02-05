@@ -12,6 +12,8 @@ namespace TaskManager.View.Models
         public DateTime DueDate { get; set; }
         public string Notes { get; set; }
         public DateTime CreationDate { get; set; }
-        public string Username { get; internal set; }
+        public string? Username { get; set; }
+        public string? StateName { get; set; }
+        public string? PriorityName { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-﻿using TaskManager.Model.DTOs;
-using TaskManager.Model.Entities;
+﻿using TaskManager.Model.Entities;
 using TaskManager.ViewModels.Models;
 using TaskManagerApp.ViewModel.Services;
 

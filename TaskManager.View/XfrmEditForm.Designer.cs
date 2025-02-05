@@ -41,7 +41,6 @@
             btnSave = new DevExpress.XtraEditors.SimpleButton();
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
             Descripción = new DevExpress.XtraLayout.LayoutControlItem();
-            simpleSeparator1 = new DevExpress.XtraLayout.SimpleSeparator();
             simpleSeparator2 = new DevExpress.XtraLayout.SimpleSeparator();
             Usuario = new DevExpress.XtraLayout.LayoutControlItem();
             simpleSeparator3 = new DevExpress.XtraLayout.SimpleSeparator();
@@ -69,7 +68,6 @@
             ((System.ComponentModel.ISupportInitialize)txtNotas.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Descripción).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)simpleSeparator1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Usuario).BeginInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator3).BeginInit();
@@ -130,36 +128,42 @@
             // cbxUsuario
             // 
             cbxUsuario.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", tasksBindingSource, "Username", true));
-            cbxUsuario.Location = new System.Drawing.Point(134, 40);
+            cbxUsuario.Location = new System.Drawing.Point(134, 39);
             cbxUsuario.Name = "cbxUsuario";
             cbxUsuario.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             cbxUsuario.Size = new System.Drawing.Size(413, 22);
             cbxUsuario.StyleController = dataLayoutControl1;
             cbxUsuario.TabIndex = 2;
+            cbxUsuario.SelectedIndexChanged += CbxUsuario_SelectedIndexChanged;
             // 
             // cbxEstado
             // 
-            cbxEstado.Location = new System.Drawing.Point(134, 67);
+            cbxEstado.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", tasksBindingSource, "StateName", true));
+            cbxEstado.DataBindings.Add(new System.Windows.Forms.Binding("DataContext", tasksBindingSource, "StateId", true));
+            cbxEstado.Location = new System.Drawing.Point(134, 66);
             cbxEstado.Name = "cbxEstado";
             cbxEstado.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             cbxEstado.Size = new System.Drawing.Size(413, 22);
             cbxEstado.StyleController = dataLayoutControl1;
             cbxEstado.TabIndex = 3;
+            cbxEstado.SelectedIndexChanged += cbxEstado_SelectedIndexChanged;
             // 
             // cbxPriority
             // 
-            cbxPriority.Location = new System.Drawing.Point(134, 94);
+            cbxPriority.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", tasksBindingSource, "PriorityName", true));
+            cbxPriority.Location = new System.Drawing.Point(134, 93);
             cbxPriority.Name = "cbxPriority";
             cbxPriority.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             cbxPriority.Size = new System.Drawing.Size(413, 22);
             cbxPriority.StyleController = dataLayoutControl1;
             cbxPriority.TabIndex = 4;
+            cbxPriority.SelectedIndexChanged += cbxPriority_SelectedIndexChanged;
             // 
             // dtFechaCompromiso
             // 
             dtFechaCompromiso.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", tasksBindingSource, "DueDate", true));
             dtFechaCompromiso.EditValue = null;
-            dtFechaCompromiso.Location = new System.Drawing.Point(134, 121);
+            dtFechaCompromiso.Location = new System.Drawing.Point(134, 120);
             dtFechaCompromiso.Name = "dtFechaCompromiso";
             dtFechaCompromiso.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             dtFechaCompromiso.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -170,7 +174,7 @@
             // txtNotas
             // 
             txtNotas.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", tasksBindingSource, "Notes", true));
-            txtNotas.Location = new System.Drawing.Point(134, 148);
+            txtNotas.Location = new System.Drawing.Point(134, 147);
             txtNotas.Name = "txtNotas";
             txtNotas.Size = new System.Drawing.Size(413, 22);
             txtNotas.StyleController = dataLayoutControl1;
@@ -178,6 +182,7 @@
             // 
             // btnSave
             // 
+            btnSave.DialogResult = System.Windows.Forms.DialogResult.OK;
             btnSave.Location = new System.Drawing.Point(12, 297);
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(346, 27);
@@ -189,7 +194,7 @@
             // 
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { Descripción, simpleSeparator1, simpleSeparator2, Usuario, simpleSeparator3, Estado, simpleSeparator4, Prioridad, simpleSeparator5, txtFechaCompromiso, simpleSeparator6, txtNotes, emptySpaceItem2, layoutControlItem2, layoutControlItem3 });
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { Descripción, simpleSeparator2, Usuario, simpleSeparator3, Estado, simpleSeparator4, Prioridad, simpleSeparator5, txtFechaCompromiso, simpleSeparator6, txtNotes, emptySpaceItem2, layoutControlItem2, layoutControlItem3 });
             Root.Name = "Root";
             Root.Size = new System.Drawing.Size(559, 336);
             Root.TextVisible = false;
@@ -202,84 +207,78 @@
             Descripción.Name = "Descripción";
             Descripción.Size = new System.Drawing.Size(539, 26);
             // 
-            // simpleSeparator1
-            // 
-            simpleSeparator1.Location = new System.Drawing.Point(0, 26);
-            simpleSeparator1.Name = "simpleSeparator1";
-            simpleSeparator1.Size = new System.Drawing.Size(539, 1);
-            // 
             // simpleSeparator2
             // 
-            simpleSeparator2.Location = new System.Drawing.Point(0, 27);
+            simpleSeparator2.Location = new System.Drawing.Point(0, 26);
             simpleSeparator2.Name = "simpleSeparator2";
             simpleSeparator2.Size = new System.Drawing.Size(539, 1);
             // 
             // Usuario
             // 
             Usuario.Control = cbxUsuario;
-            Usuario.Location = new System.Drawing.Point(0, 28);
+            Usuario.Location = new System.Drawing.Point(0, 27);
             Usuario.Name = "Usuario";
             Usuario.Size = new System.Drawing.Size(539, 26);
             // 
             // simpleSeparator3
             // 
-            simpleSeparator3.Location = new System.Drawing.Point(0, 54);
+            simpleSeparator3.Location = new System.Drawing.Point(0, 53);
             simpleSeparator3.Name = "simpleSeparator3";
             simpleSeparator3.Size = new System.Drawing.Size(539, 1);
             // 
             // Estado
             // 
             Estado.Control = cbxEstado;
-            Estado.Location = new System.Drawing.Point(0, 55);
+            Estado.Location = new System.Drawing.Point(0, 54);
             Estado.Name = "Estado";
             Estado.Size = new System.Drawing.Size(539, 26);
             // 
             // simpleSeparator4
             // 
-            simpleSeparator4.Location = new System.Drawing.Point(0, 81);
+            simpleSeparator4.Location = new System.Drawing.Point(0, 80);
             simpleSeparator4.Name = "simpleSeparator4";
             simpleSeparator4.Size = new System.Drawing.Size(539, 1);
             // 
             // Prioridad
             // 
             Prioridad.Control = cbxPriority;
-            Prioridad.Location = new System.Drawing.Point(0, 82);
+            Prioridad.Location = new System.Drawing.Point(0, 81);
             Prioridad.Name = "Prioridad";
             Prioridad.Size = new System.Drawing.Size(539, 26);
             // 
             // simpleSeparator5
             // 
-            simpleSeparator5.Location = new System.Drawing.Point(0, 108);
+            simpleSeparator5.Location = new System.Drawing.Point(0, 107);
             simpleSeparator5.Name = "simpleSeparator5";
             simpleSeparator5.Size = new System.Drawing.Size(539, 1);
             // 
             // txtFechaCompromiso
             // 
             txtFechaCompromiso.Control = dtFechaCompromiso;
-            txtFechaCompromiso.Location = new System.Drawing.Point(0, 109);
+            txtFechaCompromiso.Location = new System.Drawing.Point(0, 108);
             txtFechaCompromiso.Name = "txtFechaCompromiso";
             txtFechaCompromiso.Size = new System.Drawing.Size(539, 26);
             txtFechaCompromiso.Text = "Fecha Compromiso";
             // 
             // simpleSeparator6
             // 
-            simpleSeparator6.Location = new System.Drawing.Point(0, 135);
+            simpleSeparator6.Location = new System.Drawing.Point(0, 134);
             simpleSeparator6.Name = "simpleSeparator6";
             simpleSeparator6.Size = new System.Drawing.Size(539, 1);
             // 
             // txtNotes
             // 
             txtNotes.Control = txtNotas;
-            txtNotes.Location = new System.Drawing.Point(0, 136);
+            txtNotes.Location = new System.Drawing.Point(0, 135);
             txtNotes.Name = "txtNotes";
             txtNotes.Size = new System.Drawing.Size(539, 26);
             txtNotes.Text = "Notas";
             // 
             // emptySpaceItem2
             // 
-            emptySpaceItem2.Location = new System.Drawing.Point(0, 162);
+            emptySpaceItem2.Location = new System.Drawing.Point(0, 161);
             emptySpaceItem2.Name = "emptySpaceItem2";
-            emptySpaceItem2.Size = new System.Drawing.Size(539, 123);
+            emptySpaceItem2.Size = new System.Drawing.Size(539, 124);
             // 
             // layoutControlItem2
             // 
@@ -318,7 +317,7 @@
             Controls.Add(dataLayoutControl1);
             Name = "XfrmEditForm";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Editar Tarea";
+            Text = "Editar";
             ((System.ComponentModel.ISupportInitialize)dataLayoutControl1).EndInit();
             dataLayoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)txtDescription.Properties).EndInit();
@@ -331,7 +330,6 @@
             ((System.ComponentModel.ISupportInitialize)txtNotas.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)Root).EndInit();
             ((System.ComponentModel.ISupportInitialize)Descripción).EndInit();
-            ((System.ComponentModel.ISupportInitialize)simpleSeparator1).EndInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator2).EndInit();
             ((System.ComponentModel.ISupportInitialize)Usuario).EndInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator3).EndInit();
@@ -356,7 +354,6 @@
         private DevExpress.XtraEditors.TextEdit txtDescription;
         private DevExpress.XtraLayout.LayoutControlItem Descripción;
         private System.Windows.Forms.BindingSource tasksBindingSource;
-        private DevExpress.XtraLayout.SimpleSeparator simpleSeparator1;
         private DevExpress.XtraLayout.SimpleSeparator simpleSeparator2;
         private DevExpress.XtraEditors.TextEdit textEdit1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;

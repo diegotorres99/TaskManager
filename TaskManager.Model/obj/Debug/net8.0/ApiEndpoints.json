@@ -105,16 +105,6 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "TaskManager.Model.Controllers.TasksController",
-    "Method": "GetTasksTest",
-    "RelativePath": "api/Tasks/test",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "TaskManager.Model.Controllers.UsersController",
     "Method": "GetUsers",
     "RelativePath": "api/Users",

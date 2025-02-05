@@ -54,30 +54,7 @@ namespace TaskManagerApp.ViewModel.Services
             }
         }
 
-        private string BuildQueryParams(TaskFilterDto filters)
-        {
-            var queryParams = new List<string>();
-
-            if (filters.UserId.HasValue)
-                queryParams.Add($"UserId={filters.UserId}");
-            if (filters.StateId.HasValue)
-                queryParams.Add($"StateId={filters.StateId}");
-            if (!string.IsNullOrEmpty(filters.PriorityId.ToString()))
-                queryParams.Add($"PriorityId={filters.PriorityId}");
-            if (filters.DueDateStart.HasValue)
-                queryParams.Add($"DueDateStart={filters.DueDateStart.Value:yyyy-MM-dd}");
-            if (filters.DueDateEnd.HasValue)
-                queryParams.Add($"DueDateEnd={filters.DueDateEnd.Value:yyyy-MM-dd}");
-
-            queryParams.Add($"Skip={filters.Skip}");
-            queryParams.Add($"Take={filters.Take}");
-            queryParams.Add($"SortField={filters.SortField}");
-            queryParams.Add($"SortAscending={filters.SortAscending.ToString().ToLower()}");
-
-            return string.Join("&", queryParams);
-        }
-
-        public async Task UpdateOrderItemAsync(TaskDto item)
+        public async Task UpdateTaskAsync(TaskDto item)
         {
             var requestUri = $"api/tasks/{item.Id}";
 
@@ -100,9 +77,9 @@ namespace TaskManagerApp.ViewModel.Services
             }
         }
 
-        public async Task CreateOrderItemAsync(TaskDto item)
+        public async Task CreateTaskAsync(TaskDto item)
         {
-            var requestUri = $"api/orderitems";
+            var requestUri = $"api/tasks/create-task";
 
             try
             {
@@ -123,7 +100,7 @@ namespace TaskManagerApp.ViewModel.Services
             }
         }
 
-        public async Task DeleteOrderItemAsync(int id)
+        public async Task DeleteTaskAsync(int id)
         {
             var requestUri = $"api/tasks/{id}";
 
@@ -143,6 +120,28 @@ namespace TaskManagerApp.ViewModel.Services
             }
         }
 
+        private string BuildQueryParams(TaskFilterDto filters)
+        {
+            var queryParams = new List<string>();
+
+            if (filters.UserId.HasValue)
+                queryParams.Add($"UserId={filters.UserId}");
+            if (filters.StateId.HasValue)
+                queryParams.Add($"StateId={filters.StateId}");
+            if (!string.IsNullOrEmpty(filters.PriorityId.ToString()))
+                queryParams.Add($"PriorityId={filters.PriorityId}");
+            if (filters.DueDateStart.HasValue)
+                queryParams.Add($"DueDateStart={filters.DueDateStart.Value:yyyy-MM-dd}");
+            if (filters.DueDateEnd.HasValue)
+                queryParams.Add($"DueDateEnd={filters.DueDateEnd.Value:yyyy-MM-dd}");
+
+            queryParams.Add($"Skip={filters.Skip}");
+            queryParams.Add($"Take={filters.Take}");
+            queryParams.Add($"SortField={filters.SortField}");
+            queryParams.Add($"SortAscending={filters.SortAscending.ToString().ToLower()}");
+
+            return string.Join("&", queryParams);
+        }
     }
 }
 
