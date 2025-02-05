@@ -1,4 +1,4 @@
-# Technical challenge - Task Manager using DevExpress WinForms Data Grid and .NET Core Service
+# Task Manager using DevExpress WinForms Data Grid and .NET Core Service
 
 ## Prerequisites
 
